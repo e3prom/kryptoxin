@@ -1,0 +1,5 @@
+name: docs
+channels:
+  - defaults
+dependencies:
+  - mkdocs==1.3.1

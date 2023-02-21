@@ -1,0 +1,7 @@
+mkdocs
+mkdocs-minify-plugin
+mkdocs-material-extensions
+material
+pygments
+pymdown-extensions
+colorama
