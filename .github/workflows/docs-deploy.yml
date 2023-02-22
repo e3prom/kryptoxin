@@ -1,5 +1,5 @@
 # This workflow will deploy the documentation for Github pages.
-name: docs
+name: Docs
 
 on:
   push:
@@ -22,6 +22,4 @@ jobs:
           key: ${{ github.ref }}
           path: .cache
       - run: make docs
-      - run: |
-          cd docs
-          mkdocs gh-deploy --force
+      - run: mkdocs gh-deploy --force
