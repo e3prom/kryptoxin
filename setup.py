@@ -9,8 +9,8 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name="Kryptoxin_e3prom",
-    version="0.9.0",
+    name="Kryptoxin",
+    version="0.9.1",
     description="A security-oriented payload encryption tool written in Python.",
     author="Nicolas Chabbey",
     author_email="eprom@toor.si",
@@ -20,7 +20,7 @@ setup(
     packages=find_packages(exclude=("tests", "docs")),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
         "Topic :: Security",
     ],

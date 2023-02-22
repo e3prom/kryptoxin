@@ -9,6 +9,9 @@
 - [Kryptoxin](#kryptoxin)
   - [Description](#description)
   - [Features](#features)
+  - [Installation](#installation)
+    - [With pip](#with-pip)
+    - [With git](#with-git)
   - [Usage](#usage)
     - [Read and encrypt from a file](#read-and-encrypt-from-a-file)
     - [Read from stdin and encrypt using AES-128-CBC](#read-from-stdin-and-encrypt-using-aes-128-cbc)
@@ -34,6 +37,22 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 - Offers proper encoding and formatting schemes for usage-specific variables.
 - Supports out-of-band key storage, with conditional trigger mechanisms.
 - Includes scripts and source code templates to be used for security-related tasks and experimentation.
+
+## Installation
+
+### With pip
+
+``` sh
+$ pip install kryptoxin
+```
+
+### With git
+
+``` sh
+$ git clone https://github.com/e3prom/kryptoxin
+$ cd kryptoxin
+$ python setup.py install
+```
 
 ## Usage
 

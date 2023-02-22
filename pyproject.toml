@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling", "pycryptodome", "click"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Kryptoxin"
+version = "0.9.1"
+authors = [
+    { name="Nicolas Chabbey", email="eprom@toor.si" },
+]
+description = "A security-oriented payload encryption tool written in Python."
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/e3prom/kryptoxin"
+"Bug Tracker" = "https://github.com/e3prom/kryptoxin/issues"
