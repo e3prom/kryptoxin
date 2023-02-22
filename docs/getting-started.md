@@ -23,26 +23,21 @@ The above commands will automatically install all the required dependencies.
 
 ### Using git { #using-source data-toc-label="using git" }
 
-First make sure you have `git` installed:
-
-Fetch the source code from the official Kryptoxin repository:
+First make sure you have `git` installed. Fetch the source code from the official Kryptoxin repository, and install the required the dependencies:
 
 === "Latest Development"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
+    cd kryptoxin
+    python setup.py install
     ```
 
 === "0.9.1"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
+    cd kryptoxin
     git checkout tags/0.9.1
+    python setup.py install
     ```
-
-Enter the repository directory and launch the install script:
-
-```sh
-cd kryptoxin
-python setup.py install
-```

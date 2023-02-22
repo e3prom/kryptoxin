@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-
+requirements = []
+with open('requirements.txt', 'r') as fh:
+    for line in fh:
+        requirements.append(line.strip())
 
 with open('README.md') as f:
     readme = f.read()
@@ -25,4 +28,5 @@ setup(
         "Topic :: Security",
     ],
     python_requires=">=3.6",
+    install_requires = requirements
 )
