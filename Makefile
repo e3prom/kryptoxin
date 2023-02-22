@@ -1,7 +1,19 @@
-init:
-    pip install -r requirements.txt
+PYTHON=/usr/bin/env python
+
+deps: requirements.txt
+	pip install -r requirements.txt
+
+docs:
+	@cd docs; \
+	echo "Building documentation..."; \
+	pip install -r requirements.txt
+	@$(PYTHON) -m mkdocs build
 
 test:
-    py.test tests
+	@$(PYTHON) -m unittest discover tests
 
-.PHONY: init test
+clean:
+	rm -rf venv
+	find . -type f -name "*.pyc" -delete
+
+.PHONY: init docs test

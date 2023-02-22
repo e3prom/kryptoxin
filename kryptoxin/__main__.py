@@ -1,4 +1,8 @@
-"""Entry point for kryptoxin."""
+"""
+kryptoxin main.
+This is the main module of the kryptoxin project.
+"""
+
 from .core.cli import cli
 
 if __name__ == "__main__":

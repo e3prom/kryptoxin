@@ -8,8 +8,6 @@
   - [Features](#features)
   - [Usage](#usage)
     - [Read and encrypt from a file](#read-and-encrypt-from-a-file)
-  - [Documentation](#documentation)
-  - [Authors](#authors)
   - [License](#license)
 
 ## Description
@@ -22,7 +20,7 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 
 - Supports `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` as inputs.
 - Generates compact, portable scripts or source codes as outputs for the below languages:
-  - [x] PowerShell
+  - [ ] PowerShell
   - [ ] C
   - [ ] C++
   - [ ] C# (.NET)
@@ -40,14 +38,6 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 $ python -m kryptoxin encrypt -k 12345 -i input_file.txt
 tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
 ```
-
-## Documentation
-
-(TODO)
-
-## Authors
-
-Nicolas &lt;e3prom>&gt; Chabbey (main author)
 
 ## License
 
