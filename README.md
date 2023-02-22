@@ -1,13 +1,18 @@
 # Kryptoxin
 
 [![Latest Release](https://img.shields.io/github/release/e3prom/Kryptoxin.svg?style=for-the-badge)](https://github.com/e3prom/Kryptoxin/releases)
-[![Software License](https://img.shields.io/badge/license-GPL-blue.svg?style=for-the-badge)](/LICENSE)
+![GitHub issues](https://img.shields.io/github/issues-raw/e3prom/kryptoxin?style=for-the-badge)
+[![GitHub Workflow - Docs](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/docs-deploy.yml?label=docs&style=for-the-badge)](https://e3prom.github.io/kryptoxin/)
+![GitHub Workflow - Tests](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/python-unittest.yml?label=Tests&style=for-the-badge)
+[![License](https://img.shields.io/github/license/e3prom/kryptoxin?style=for-the-badge)](LICENSE)
 
 - [Kryptoxin](#kryptoxin)
   - [Description](#description)
   - [Features](#features)
   - [Usage](#usage)
     - [Read and encrypt from a file](#read-and-encrypt-from-a-file)
+    - [Read from stdin and encrypt using AES-128-CBC](#read-from-stdin-and-encrypt-using-aes-128-cbc)
+  - [Documentation](#documentation)
   - [License](#license)
 
 ## Description
@@ -34,11 +39,22 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 
 ### Read and encrypt from a file
 
-```sh
+``` {sh .no-copy}
 $ python -m kryptoxin encrypt -k 12345 -i input_file.txt
 tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
 ```
 
+### Read from stdin and encrypt using AES-128-CBC
+
+``` {sh .no-copy}
+$ echo -n 'test' | python -m kryptoxin encrypt -k 12345 --alg aes --key_size 128 --mode CBC
+Z+1df03i+mSayvEFYB+rmB55N4dYoz7Rbr2LhzNjqH8=
+```
+
+## Documentation
+
+You can directly visit the [online documentation](https://e3prom.github.io/kryptoxin/) or build it locally using the `make docs` command.
+
 ## License
 
-The Kryptoxin tool is released under the GPL-3 license. See [LICENSE](LICENSE) for more detail.
+Kryptoxin is released under the GPL-3 license. See [LICENSE](LICENSE) for more detail.
