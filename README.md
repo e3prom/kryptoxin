@@ -1,9 +1,9 @@
 # Kryptoxin
 
 [![Latest Release](https://img.shields.io/github/release/e3prom/Kryptoxin.svg?style=for-the-badge)](https://github.com/e3prom/Kryptoxin/releases)
-![GitHub issues](https://img.shields.io/github/issues-raw/e3prom/kryptoxin?style=for-the-badge)
+[![GitHub issues](https://img.shields.io/github/issues-raw/e3prom/kryptoxin?style=for-the-badge)](https://github.com/e3prom/kryptoxin/issues)
 [![GitHub Workflow - Docs](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/docs-deploy.yml?label=docs&style=for-the-badge)](https://e3prom.github.io/kryptoxin/)
-![GitHub Workflow - Tests](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/python-unittest.yml?label=Tests&style=for-the-badge)
+[![GitHub Workflow - Tests](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/python-unittest.yml?label=Tests&style=for-the-badge)](https://github.com/e3prom/kryptoxin/actions/workflows/python-unittest.yml)
 [![License](https://img.shields.io/github/license/e3prom/kryptoxin?style=for-the-badge)](LICENSE)
 
 - [Kryptoxin](#kryptoxin)
@@ -57,4 +57,4 @@ You can directly visit the [online documentation](https://e3prom.github.io/krypt
 
 ## License
 
-Kryptoxin is released under the GPL-3 license. See [LICENSE](LICENSE) for more detail.
+Kryptoxin is released under the AGPL-3 license. See [LICENSE](LICENSE) for more detail.
