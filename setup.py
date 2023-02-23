@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-requirements = []
-with open('requirements.txt', 'r') as fh:
-    for line in fh:
-        requirements.append(line.strip())
 
 with open('README.md') as f:
     readme = f.read()
@@ -18,8 +14,9 @@ setup(
     author="Nicolas Chabbey",
     author_email="eprom@toor.si",
     url="https://github.com/e3prom/kryptoxin",
-    readme=readme,
+    long_description=readme,
     license=license,
+    keywords = "security encryption tool",
     packages=find_packages(exclude=("tests", "docs")),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -28,5 +25,8 @@ setup(
         "Topic :: Security",
     ],
     python_requires=">=3.6",
-    install_requires=requirements
+    install_requires=[
+        'pycryptodome',
+        'click'
+    ]
 )

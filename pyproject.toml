@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling", "pycryptodome", "click"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=59.6.0", "pycryptodome", "click"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "Kryptoxin"
