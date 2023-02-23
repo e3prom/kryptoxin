@@ -88,8 +88,10 @@ extra_css:
   - assets/css/custom.css
 
 nav:
-    - Overview: index.md
+    - Home:
+        - Overview: index.md
+        - License: license.md
     - Getting started:
         - Installation: getting-started.md
         - Usages: usages.md
-        - License: license.md
+    - Reference: reference.md

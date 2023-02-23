@@ -13,7 +13,7 @@ with open('LICENSE') as f:
 
 setup(
     name="Kryptoxin",
-    version="0.9.1",
+    version="0.9.2",
     description="A security-oriented payload encryption tool written in Python.",
     author="Nicolas Chabbey",
     author_email="eprom@toor.si",
@@ -28,5 +28,5 @@ setup(
         "Topic :: Security",
     ],
     python_requires=">=3.6",
-    install_requires = requirements
+    install_requires=requirements
 )

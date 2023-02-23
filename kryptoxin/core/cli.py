@@ -56,7 +56,7 @@ def encrypt(alg, key, key_size, opmode, iv, salt, hmac, input_file, output_file,
 
     # Call encryption function.
     encoded_ciphertext = aes.encrypt_aes(
-        plaintext, key, key_size, salt, opmode, iv, halg=hmac, iv_prepend=True, pbkdf2_iter=pbkdf2_iter)
+        plaintext, key, key_size, salt, opmode, iv, halg=hmac, pbkdf2_iter=pbkdf2_iter)
 
     # If output file given, write content (and create file if necessary).
     if output_file:

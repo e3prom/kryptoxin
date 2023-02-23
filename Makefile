@@ -5,10 +5,11 @@ deps: requirements.txt
 
 docs:
 	cd docs; \
-	echo "Building documentation..."; \
+	echo "[*] Building Kryptoxin Documentation..."; \
 	pip install -r requirements.txt ; \
 	cd ..; \
-	$(PYTHON) -m mkdocs build
+	$(PYTHON) -m mkdocs build; \
+	echo "[!] To browse local documentation, type in 'python -m mkdocs serve'"
 
 test:
 	$(PYTHON) -m unittest discover tests
@@ -20,4 +21,5 @@ clean:
 	rm -rf venv
 	find . -type f -name "*.pyc" -delete
 
+.SILENT: docs
 .PHONY: deps docs test install clean

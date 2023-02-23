@@ -25,7 +25,7 @@ CIPHER_DEFAULT_BLOCKMODE = 'CBC'    # Default block cipher operation mode
 CIPHER_DEFAULT_HMHASHALG = 'SHA1'   # Default HMAC (.NET compat.)
 CIPHER_DEFAULT_PBKDF2_ITER = 10000  # PBKDF2 number of iterations
 CIPHER_DEFAULT_PBKDF2_DKLEN = 32    # PBKDF2 HMAC digest length
-CIPHER_DEFAULT_IV_PREPEND = False   # Prepend IV to plain-text
+CIPHER_DEFAULT_IV_PREPEND = True    # Prepend IV to plain-text
 # AE6 Cipher Block size (bytes)
 CIPHER_BLOCK_BLKSZ_AES = 16         # AES Block Size - 128-bits
 # PBKDF2 Key Sizes (bytes)

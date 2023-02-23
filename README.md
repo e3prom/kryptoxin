@@ -4,7 +4,7 @@
 [![GitHub issues](https://img.shields.io/github/issues-raw/e3prom/kryptoxin?style=for-the-badge)](https://github.com/e3prom/kryptoxin/issues)
 [![GitHub Workflow - Docs](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/docs-deploy.yml?label=docs&style=for-the-badge)](https://e3prom.github.io/kryptoxin/)
 [![GitHub Workflow - Tests](https://img.shields.io/github/actions/workflow/status/e3prom/kryptoxin/python-unittest.yml?label=Tests&style=for-the-badge)](https://github.com/e3prom/kryptoxin/actions/workflows/python-unittest.yml)
-[![License](https://img.shields.io/github/license/e3prom/kryptoxin?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/github/license/e3prom/kryptoxin?style=for-the-badge)](https://raw.githubusercontent.com/e3prom/kryptoxin/master/LICENSE)
 
 - [Kryptoxin](#kryptoxin)
   - [Description](#description)
@@ -43,15 +43,15 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 ### With pip
 
 ``` sh
-$ pip install kryptoxin
+pip install kryptoxin
 ```
 
 ### With git
 
 ``` sh
-$ git clone https://github.com/e3prom/kryptoxin
-$ cd kryptoxin
-$ python setup.py install
+git clone https://github.com/e3prom/kryptoxin
+cd kryptoxin
+python setup.py install
 ```
 
 ## Usage

@@ -13,10 +13,10 @@ Open up a terminal and install Kryptoxin using pip:
     ``` sh
     pip install kryptoxin
     ```
-=== "0.9.1"
+=== "0.9.2"
 
     ``` sh
-    pip install kryptoxin==0.9.1
+    pip install kryptoxin==0.9.2
     ```
 
 The above commands will automatically install all the required dependencies.
@@ -33,11 +33,11 @@ First make sure you have `git` installed. Fetch the source code from the officia
     python setup.py install
     ```
 
-=== "0.9.1"
+=== "0.9.2"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
     cd kryptoxin
-    git checkout tags/0.9.1
+    git checkout tags/0.9.2
     python setup.py install
     ```
