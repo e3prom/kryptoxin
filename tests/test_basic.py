@@ -59,9 +59,10 @@ class TestCli(unittest.TestCase):
                                '--salt', salt, '--hmac', 'sha256',
                                '--iter', '50000'])
         print(f"Test result is: {result.output}")
-        self.assertEqual(result.output, "nY8lsP+MabdA8ErXQP/M385ln0QlbcTF/Wa90X4DZLPG"
-                                        "5w8308pRq9H72Tg1+hQKuSlJ8YrsQR/oWFkSiCQ8S81M"
-                                        "whOgE1Fc4OjIrrntWsrdqJfv8CwaHnkt339CwmGE\n")
+        self.assertEqual(result.output, "nY8lsP+MabdA8ErXQP/M385ln0QlbcTF/Wa90"
+                                        "X4DZLPG5w8308pRq9H72Tg1+hQKuSlJ8YrsQR"
+                                        "/oWFkSiCQ8S81MwhOgE1Fc4OjIrrntWsrdqJf"
+                                        "v8CwaHnkt339CwmGE\n")
 
 
 if __name__ == '__main__':
