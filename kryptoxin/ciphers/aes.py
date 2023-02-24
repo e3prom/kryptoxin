@@ -48,11 +48,11 @@ def encrypt_aes(plaintext, key, key_size, salt, mode, iv, halg=CIPHER_DEFAULT_HM
     # Derived key sizes
     # must be 16, 24 or 32 bytes for AES128,192,256 respectively.
     dklen = CIPHER_PBKDF2_AES256_KS
-    if key_size is 128:
+    if key_size == 128:
         dklen = CIPHER_PBKDF2_AES128_KS
-    elif key_size is 192:
+    elif key_size == 192:
         dklen = CIPHER_PBKDF2_AES192_KS
-    elif key_size is 256:
+    elif key_size == 256:
         dklen = CIPHER_PBKDF2_AES256_KS
     else:
         log.error(
