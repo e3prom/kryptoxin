@@ -17,8 +17,9 @@ def _init_logger():
 _init_logger()
 log = logging.getLogger(__name__)
 
-
-# Constants - Defaults
+# Package
+PROGRAM_NAME = 'Kryptoxin'
+# Cipher Parameters- Defaults
 CIPHER_DEFAULT_ALGORITHM = 'AES'    # Default encryption algorithm
 CIPHER_DEFAULT_KEYSIZE = 256        # Default block cipher key-size
 CIPHER_DEFAULT_BLOCKMODE = 'CBC'    # Default block cipher operation mode

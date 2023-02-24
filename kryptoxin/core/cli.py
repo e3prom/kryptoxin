@@ -9,11 +9,12 @@ from ..ciphers import aes
 
 
 @click.group()
-def cli():
+@click.version_option(prog_name=PROGRAM_NAME)
+def cli(ctx):
     pass
 
 
-@click.command()
+@cli.command()
 @click.option('-i', '--in', 'input_file', type=click.File("rb"), default=sys.stdin.buffer,
               nargs=1, help="Input file (e,g. Script, .dll file)")
 @click.option('-o', '--out', 'output_file', type=click.File("wb"), help="Output file")
