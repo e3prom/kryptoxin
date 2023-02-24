@@ -2,14 +2,19 @@
 kryptoxin AES cipher module.
 This is the aes cipher module of the kryptoxin project.
 """
-from ..core import *  # Import all from core
+from ..core import log
+from ..core.constants import *
 from . import base64
 import hashlib
 import Crypto.Cipher.AES
 
 
-def encrypt_aes(plaintext, key, key_size, salt, mode, iv, halg=CIPHER_DEFAULT_HMHASHALG,
-                pbkdf2_iter=CIPHER_DEFAULT_PBKDF2_ITER, iv_prepend=CIPHER_DEFAULT_IV_PREPEND):
+def encrypt_aes(
+    plaintext, key, key_size, salt, mode,
+    iv, halg=CIPHER_DEFAULT_HMHASHALG,
+    pbkdf2_iter=CIPHER_DEFAULT_PBKDF2_ITER,
+    iv_prepend=CIPHER_DEFAULT_IV_PREPEND
+):
     """ This function perform AES block cipher encryption.
         Pads the plain-text using PKCS#7.
         Derives an encryption key using the PBKDF2 key-derivation function.
@@ -27,13 +32,13 @@ def encrypt_aes(plaintext, key, key_size, salt, mode, iv, halg=CIPHER_DEFAULT_HM
     """
     # Cipher block operation modes mapping
     # use if-then until python 3.10 becomes more readily available.
-    if mode == CIPHER_BLOCK_OPERMODE_CBC:
+    if mode.casefold() == CIPHER_BLOCK_OPERMODE_CBC:
         op_mode = Crypto.Cipher.AES.MODE_CBC
-    elif mode == CIPHER_BLOCK_OPERMODE_CFB:
+    elif mode.casefold() == CIPHER_BLOCK_OPERMODE_CFB:
         op_mode = Crypto.Cipher.AES.MODE_CFB
-    elif mode == CIPHER_BLOCK_OPERMODE_OFB:
+    elif mode.casefold() == CIPHER_BLOCK_OPERMODE_OFB:
         op_mode = Crypto.Cipher.AES.MODE_OFB
-    elif mode == CIPHER_BLOCK_OPERMODE_EAX:
+    elif mode.casefold() == CIPHER_BLOCK_OPERMODE_EAX:
         op_mode = Crypto.Cipher.AES.MODE_EAX
     else:
         log.error(f"Unknown cipher block operation mode '{mode}'.")
@@ -55,8 +60,7 @@ def encrypt_aes(plaintext, key, key_size, salt, mode, iv, halg=CIPHER_DEFAULT_HM
     elif key_size == 256:
         dklen = CIPHER_PBKDF2_AES256_KS
     else:
-        log.error(
-            f"Invalid AES key size '{key_size}'. Available: 128, 192, 256 bits")
+        log.error(f"Invalid AES key size '{key_size}")
         raise SystemExit
 
     # Derive the encryption key from the password.

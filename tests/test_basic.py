@@ -1,7 +1,7 @@
 import unittest
 from click.testing import CliRunner
-
-from kryptoxin.core import cli, TEST_TXTFILE_PATH
+from kryptoxin.core import cli
+from kryptoxin.core.constants import TEST_TXTFILE_PATH
 
 
 class TestCli(unittest.TestCase):
@@ -24,8 +24,8 @@ class TestCli(unittest.TestCase):
         The goal here is to ensure command-line options are all correct.
         """
         key = '12345'
-        iv = 'A'*16
-        salt = 'B'*16
+        iv = 'A' * 16
+        salt = 'B' * 16
         runner = CliRunner()
         result = runner.invoke(cli.encrypt, [
                                '--key', key, '--in', TEST_TXTFILE_PATH,
@@ -42,8 +42,8 @@ class TestCli(unittest.TestCase):
         """
         in_file = 'tests/samples/random.bin'
         key = '12345'
-        iv = 'A'*16
-        salt = 'B'*16
+        iv = 'A' * 16
+        salt = 'B' * 16
         runner = CliRunner()
         result = runner.invoke(cli.encrypt, [
                                '--key', key, '--in', in_file,
