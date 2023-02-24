@@ -1,5 +1,5 @@
 """
-kryptoxin main.
+kryptoxin main module.
 This is the main module of the kryptoxin project.
 """
 
