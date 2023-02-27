@@ -27,5 +27,3 @@ CIPHER_BLOCK_OPERMODE_CBC = "cbc"
 CIPHER_BLOCK_OPERMODE_CFB = "cfb"
 CIPHER_BLOCK_OPERMODE_OFB = "ofb"
 CIPHER_BLOCK_OPERMODE_EAX = "eax"
-# Test Constants
-TEST_TXTFILE_PATH = 'tests/samples/input_file.txt'
