@@ -10,11 +10,12 @@
   - [Description](#description)
   - [Features](#features)
   - [Installation](#installation)
-    - [With pip](#with-pip)
-    - [With git](#with-git)
-  - [Usage](#usage)
-    - [Read and encrypt from a file](#read-and-encrypt-from-a-file)
-    - [Read from stdin and encrypt using AES-128-CBC](#read-from-stdin-and-encrypt-using-aes-128-cbc)
+    - [With pip (latest release)](#with-pip-latest-release)
+    - [With git (development version)](#with-git-development-version)
+  - [Usages](#usages)
+    - [Read, Encrypt and Decrypt from stdin](#read-encrypt-and-decrypt-from-stdin)
+    - [Read and Encrypt from a file](#read-and-encrypt-from-a-file)
+    - [Encrypt using AES-128-CBC](#encrypt-using-aes-128-cbc)
   - [Documentation](#documentation)
   - [License](#license)
 
@@ -26,44 +27,58 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 
 ## Features
 
-- Supports `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` as inputs.
-- Generates compact, portable scripts or source codes as outputs for the below languages:
+The features below are currently supported, or are planned to be released in the near future:
+
+- Provides encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
+- Provides decryption of base64 encoded ciphertext.
+- Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes`.
+- Generates compact, portable scripts or source codes as outputs for the below programming languages (not yet available):
   - [ ] PowerShell
   - [ ] C
   - [ ] C++
   - [ ] C# (.NET)
-- Provides multiple block cipher algorithms, key sizes and modes of operations, such as `AES256-CBC`.
+- Supports multiple block cipher algorithms, key sizes and modes of operations, such as `AES256-CBC`.
 - Implements key derivations functions such as `PBKDF2`.
 - Offers proper encoding and formatting schemes for usage-specific variables.
-- Supports out-of-band key storage, with conditional trigger mechanisms.
-- Includes scripts and source code templates to be used for security-related tasks and experimentation.
+- Supports out-of-band key storage, with conditional trigger mechanisms (not yet available).
+- Includes scripts and source code templates to be used for security-related tasks and experimentation (not yet available).
 
 ## Installation
 
-### With pip
+### With pip (latest release)
 
 ``` sh
 pip install kryptoxin
 ```
 
-### With git
+### With git (development version)
 
 ``` sh
 git clone https://github.com/e3prom/kryptoxin
 cd kryptoxin
-python setup.py install
+sudo make install
 ```
 
-## Usage
+## Usages
 
-### Read and encrypt from a file
+### Read, Encrypt and Decrypt from stdin
+``` {sh .no-copy}
+$ echo -n 'test' | python -m kryptoxin encrypt -k 1234
+tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
+
+$ echo -n 'tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=' | \
+> python -m kryptoxin decrypt -k 12345
+test
+```
+
+### Read and Encrypt from a file
 
 ``` {sh .no-copy}
 $ python -m kryptoxin encrypt -k 12345 -i input_file.txt
 tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
 ```
 
-### Read from stdin and encrypt using AES-128-CBC
+### Encrypt using AES-128-CBC
 
 ``` {sh .no-copy}
 $ echo -n 'test' | python -m kryptoxin encrypt -k 12345 --alg aes --key_size 128 --mode CBC
