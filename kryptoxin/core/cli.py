@@ -9,7 +9,15 @@ from .constants import *
 from ..crypto import aes
 
 
-# local array of click.options for cryptographic parameters options
+# Sub-class of click.Group
+class NaturalOrderCommands(click.Group):
+    def list_commands(self, ctx):
+        """ This function returns commands in a natural order
+        """
+        return self.commands.keys()
+
+
+# Local array of click.options for cryptographic parameters options
 _cmd_opts_crypto = [
     click.option('-i', '--in', 'input_file', type=click.File("rb"),
                  default=sys.stdin.buffer, nargs=1,
@@ -54,7 +62,7 @@ def _add_cmd_options(options):
     return _add_options
 
 
-@ click.group()
+@ click.group(cls=NaturalOrderCommands)
 @ click.version_option(prog_name=PROGRAM_NAME)
 def cli(**kwargs):
     pass

@@ -6,7 +6,7 @@ deps: requirements.txt
 docs:
 	cd docs; \
 	echo "[*] Building Kryptoxin Documentation..."; \
-	pip install -r requirements.txt ; \
+	pip install -r requirements.txt --user ; \
 	cd ..; \
 	$(PYTHON) -m mkdocs build; \
 	echo "[!] To browse local documentation, type in 'python -m mkdocs serve'"

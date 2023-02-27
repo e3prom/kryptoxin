@@ -6,7 +6,7 @@ Kryptoxin is supporting various encryption features and options, this section of
 
 To keep the usage simple and streamlined, Kryptoxin implicitly uses parameters by default. Some of these have been selected due to their wide support across frameworks and operating systems. Therefore, most of the time you don't have to explicitly specify them to achieve a specific goal such as encrypting a payload.
 
-### Encryption
+### Encryption and Decryption
 
 * Encryption Algorithm: `Advanced Encryption Standard` or `AES`
 * Encryption key size: `256 bits`
