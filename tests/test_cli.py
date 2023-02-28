@@ -9,7 +9,7 @@ from kryptoxin.core import cli
 # Constants
 _TEST_TXTFILE_PATH = 'tests/samples/input_file.txt'
 _TEST_BINFILE_PATH = 'tests/samples/random.bin'
-_TEST_CTTMPFILE_PATH = '/tmp/kryptoxin_test_out.bin'
+_TEST_CTTMPFILE_PATH = 'tests/samples/cli_decrypt_enc-out.bin'
 
 
 class TestCli(unittest.TestCase):

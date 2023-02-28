@@ -1,0 +1,3 @@
+# Disclaimer
+
+The `kryptoxin` program is distributed "AS IS" without any warranties or conditions of any kind. Under no circumstances can the developers, maintainers, or contributors be held responsible for the use of this software. Any damage or consequence resulting from the direct or indirect use of this software cannot be attributed to the above mentioned individuals or organizations. All opinions and knowledge expressed in the source codes, documentation, templates and examples are provided for educational and demonstration purposes only. By using this software you agree to the terms expressed therein.

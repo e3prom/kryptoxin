@@ -94,4 +94,6 @@ nav:
     - Getting started:
         - Installation: getting-started.md
         - Usages: usages.md
+        - Disclaimer: disclaimer.md
     - Reference: reference.md
+    - Support: support.md
