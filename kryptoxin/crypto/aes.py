@@ -96,8 +96,17 @@ def decrypt(
     pbkdf2_iter: Number of iterations for the key-derivation function
     iv_prepend: Prepend Initialization Vector (IV) to the plain-text
     """
-    # Decode the ciphertext using base64
-    ciphertext = base64.decode_base64(ciphertext)
+    # Decode the ciphertext using base64.
+    try:
+        ciphertext = base64.decode_base64(ciphertext)
+    except base64.base64.binascii.Error:
+        log.error("Cannot decode ciphertext input using base64.")
+        raise SystemExit
+
+    # Do basic checks on the decoded ciphertext before continuing.
+    if len(ciphertext) < CIPHER_BLOCK_BLKSZ_AES:
+        log.error("Invalid AES ciphertext data.")
+        raise SystemExit
 
     # Determine the block-cipher operation mode.
     op_mode = _cipher_opmode(mode)
@@ -105,7 +114,7 @@ def decrypt(
     # Call the key-derivation function
     derived_key = pbkdf2.derive_key(key, key_size, halg, pbkdf2_iter, salt)
 
-    # Create new AES cipher
+    # Create a new AES cipher
     cipher = Crypto.Cipher.AES.new(derived_key, op_mode, iv)
 
     # Perform decryption
@@ -116,17 +125,19 @@ def decrypt(
     if iv_prepend:
         plaintext = plaintext[CIPHER_BLOCK_BLKSZ_AES:]
 
-    # Removes the PKCS#7 padding bytes
-    # Read the padding length from the plaintext and
+    # Removes the PKCS#7 padding bytes.
+    # read the padding length from the plaintext and
     # truncate the plaintext accordingly.
     pad_len = plaintext[-1]
     plaintext = plaintext[:-pad_len]
 
     # Check plaintext bytes object size.
+    # if the length is zero, the parameters were invalid.
     if not len(plaintext):
         log.error(
-            "Error while performing AES decryption. "
-            "Verify input parameters such as the key.")
+            "Cannot decrypt provided ciphertext. "
+            "Verify the input parameters such as the encryption key "
+            "and the operation mode are correct.")
         raise SystemExit
 
     # return the plaintext

@@ -62,6 +62,7 @@ sudo make install
 ## Usages
 
 ### Read, Encrypt and Decrypt from stdin
+
 ``` {sh .no-copy}
 $ echo -n 'test' | python -m kryptoxin encrypt -k 1234
 tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=

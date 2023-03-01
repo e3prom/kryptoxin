@@ -10,11 +10,11 @@ To keep the usage simple and streamlined, Kryptoxin implicitly uses parameters b
 
 * Encryption Algorithm: `Advanced Encryption Standard` or `AES`
 * Encryption key size: `256 bits`
-* Block Cipher Operation Mode: `Cipher Block Chaining` or `CBC`
+* Block Cipher Mode of Operation: `Cipher Block Chaining` or `CBC`
 * Key-Derivation Function: `PBKDF2`
-  * Hash-Based Message Authentication Code (HMAC): `SHA-1`
-  * Iteration Count: `10000`
-  * Derived Key Length: `32 bytes`
+    * Hash-Based Message Authentication Code (HMAC): `SHA-1`
+    * Iteration Count: `10000`
+    * Derived Key Length: `32 bytes`
 * Initialization Vector (IV): `0x0` (16 bytes)
 * IV Prepending: `Yes` (before encryption)
 * Salt: `0x0` (16 bytes)
@@ -24,3 +24,27 @@ To keep the usage simple and streamlined, Kryptoxin implicitly uses parameters b
 
 * File Encoding: `UTF-8` (Linux/Unix)
 * Data Encoding: `base64`
+
+## Supported Parameters
+
+### Command-line Options
+
+The list below details the command-line parameters and options currently supported by Kryptoxin:
+
+* Encryption Key (`-k`, `--key`)
+* Key Size (`-s`, `--key_size`)
+    * Support between 256 and 4096 bits keys.
+* Encryption Algorithms (`-a`, `--alg`):
+    * Advanced Encryption Standard: `AES`
+* Block Cipher Mode of Operations:
+    * Cipher Block Chaining: `CBC`
+    * Cipher Feedback: `CFB`
+    * Output FeedBack: `OFB`
+    * Encrypt-then-Authenticate-then-Translate: `EAX`
+* Initialization Vector (`--iv`)
+* Salt (`--salt`)
+* Hash-based Message Authentication Code Algorithms (`-h`, `--hmac`):
+    * `SHA1`
+    * `SHA256`
+    * `SHA512`
+* PBKDF2 Iteration Count (`--iter`)
