@@ -25,7 +25,7 @@ class TestCli(unittest.TestCase):
         result = runner.invoke(cli.encrypt, [
                                '--key', key, '--in', in_file])
         self.assertEqual(
-            result.output, "tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=\n")
+            result.output, "5bP32GKoJa57IcKL4sWeUQ==\n")
 
     def test_cli_encrypt_infile(self):
         """
@@ -45,7 +45,7 @@ class TestCli(unittest.TestCase):
                                '--salt', salt, '--hmac', 'sha256',
                                '--iter', '50000'])
         self.assertEqual(
-            result.output, "ybIQbSAiCWV2QZek32j2aISQcrh26icdk7mOnxkqwLI=\n")
+            result.output, "iz+bKSFUYsFoBELwk5Ds5g==\n")
 
     def test_cli_encrypt_binfile(self):
         """
@@ -63,10 +63,10 @@ class TestCli(unittest.TestCase):
                                '--mode', 'cbc', '--iv', iv,
                                '--salt', salt, '--hmac', 'sha256',
                                '--iter', '50000'])
-        self.assertEqual(result.output, "ybIQbSAiCWV2QZek32j2aNO6T2Z2ep5tIMsx"
-                                        "FOwKU2JJVCGYrrpwmV847omewU/X3cnDbt1k"
-                                        "pYD/e06CYIZRiMTuNtjj/Jj9Visr+LSoZjbL"
-                                        "jHpFZyaWcDBulturFYuj\n")
+        self.assertEqual(result.output, "LoFcYFcRDvcNKHxyJCFBY/Er32HPoiWImRR+"
+                                        "VJp4A7punV/DJxLyxESGdoHE8aPD5UKYyJ1Z"
+                                        "GIHg8zQBdDVz2OdOsxk19elVTsOYWyr3NEE="
+                                        "\n")
 
     def test_cli_decrypt_txtfile(self):
         """
