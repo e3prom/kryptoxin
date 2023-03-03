@@ -8,7 +8,8 @@ Add-Type -AssemblyName System.Security
 function Decrypt-AES256PBKDF2HMAC {
     param (
         [byte[]]$Key,
-        [byte[]]$Ciphertext
+        [byte[]]$Ciphertext,
+        [byte[]]$IV
     )
     $aesManaged = New-Object System.Security.Cryptography.AesManaged
     $aesManaged.BlockSize = 128
@@ -16,9 +17,9 @@ function Decrypt-AES256PBKDF2HMAC {
     $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC
     $aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::PKCS7
     $aesManaged.Key = $Key
-    $aesManaged.IV = $Ciphertext[0..15]
+    $aesManaged.IV = $IV
     $decryptor = $aesManaged.CreateDecryptor()
-    $plaintext = $decryptor.TransformFinalBlock($Ciphertext, 16, $Ciphertext.Length - 16)
+    $plaintext = $decryptor.TransformFinalBlock($Ciphertext, 0, $Ciphertext.Length)
     $aesManaged.Clear()
     
     return $plaintext
@@ -36,7 +37,7 @@ function Derive-KeyPBKDF2HMAC {
 }
 
 $password = "{{ password }}"
-#$iv = [byte[]]({{ iv }})
+$iv = [byte[]]({{ iv }})
 $salt = [byte[]]({{ salt }})
 $key = Derive-KeyPBKDF2HMAC -Password $password -Salt $salt
-$data = Decrypt-AES256PBKDF2HMAC -key $key -Ciphertext $data
+$data = Decrypt-AES256PBKDF2HMAC -key $key -Ciphertext $data -IV $iv

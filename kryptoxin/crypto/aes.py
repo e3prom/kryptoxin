@@ -54,6 +54,11 @@ def encrypt(t: Toxin):
     # Perform encryption
     # some libraries require the initialization vector to be
     # prepended to the plaintext before encryption.
+    #
+    # WARNING: prepending the IV before encryption may
+    # indirectly transform CBC into ECB mode. The IV
+    # is in fact XORed to itself, thus rending the IV
+    # void.
     if t.iv_prepend:  # If True, prepend the IV
         ciphertext = cipher.encrypt(bytes(t.iv) + padded_plaintext)
     else:
