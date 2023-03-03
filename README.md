@@ -28,21 +28,22 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 
 ## Features
 
-The features below are currently supported:
+The below features are supported:
 
-- Provides encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
-- Provides decryption of base64 encoded ciphertext.
-- Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes`.
+- Provides block-cipher encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
+- Supports user-specifiable key sizes and block-cipher modes of operations, such as `AES256-CBC`.
+- Generate random cryptographic parameters such as `Initialization Vector` and `Salt`.
+- Encodes and properly formats variables for a fast and streamlined copy/paste experience.
+- Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` objects.
 - Generates compact, portable scripts or source codes as outputs for the below programming languages:
   - [x] PowerShell
   - [ ] C
   - [ ] C++
   - [ ] C# (.NET)
 - Supports multiple block cipher algorithms, key sizes and modes of operations, such as `AES256-CBC`.
-- Implements key derivations functions such as `PBKDF2`.
-- Offers proper encoding and formatting schemes for usage-specific variables.
+- Implement the key derivation functions, such as `PBKDF2`.
 - Supports out-of-band key storage, with conditional trigger mechanisms (not yet available).
-- Includes scripts and source code templates to be used for security-related tasks and experimentation (not yet available).
+- Includes scripts and source code templates to be used for security-related tasks and experimentation.
 
 ## Installation
 
