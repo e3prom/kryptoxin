@@ -2,7 +2,8 @@
 kryptoxin AES cipher module.
 This is the aes cipher module of the kryptoxin project.
 """
-from ..core import log
+from ..core.toxin import Toxin
+from ..core.log import log
 from ..core.constants import *
 from . import base64, pbkdf2
 import Crypto.Cipher.AES
@@ -29,47 +30,32 @@ def _cipher_opmode(mode):
     return op_mode
 
 
-def encrypt(
-    plaintext, key, key_size, salt, mode,
-    iv, halg=CIPHER_DEFAULT_HMHASHALG,
-    pbkdf2_iter=CIPHER_DEFAULT_PBKDF2_ITER,
-    iv_prepend=CIPHER_DEFAULT_IV_PREPEND
-):
+def encrypt(t: Toxin):
     """ This function perform AES block cipher encryption.
         Pads the plain-text using PKCS#7.
         Derives an encryption key using the PBKDF2 key-derivation function.
-
-    Arguments:
-    plaintext: The plain-text message to encrypt
-    key: Cipher's key (bytes[])
-    key_size: Algorithm key size
-    salt: Salt used to enhance hash security (bytes[])
-    mode: Block cipher operation mode
-    iv: Block cipher initialization vector (bytes[])
-    halg: PBKDF2 HMAC algorithm
-    pbkdf2_iter: Number of iterations for the key-derivation function
-    iv_prepend: Prepend Initialization Vector (IV) to the plain-text
     """
     # Determine the block-cipher operation mode.
-    op_mode = _cipher_opmode(mode)
+    _opmode = _cipher_opmode(t.opmode)
 
     # PKCS#7 Padding
     # pad the plaintext to the nearest multiple of block's length.
     padding = CIPHER_BLOCK_BLKSZ_AES - \
-        (len(plaintext) % CIPHER_BLOCK_BLKSZ_AES)
-    padded_plaintext = plaintext + bytes([padding] * padding)
+        (len(t.plaintext) % CIPHER_BLOCK_BLKSZ_AES)
+    padded_plaintext = t.plaintext + bytes([padding] * padding)
 
     # call the key-derivation function
-    derived_key = pbkdf2.derive_key(key, key_size, halg, pbkdf2_iter, salt)
+    derived_key = pbkdf2.derive_key(
+        t.key, t.key_size, t.pbkdf2_halg, t.pbkdf2_iter, t.salt)
 
     # Create new AES cipher
-    cipher = Crypto.Cipher.AES.new(derived_key, op_mode, iv)
+    cipher = Crypto.Cipher.AES.new(derived_key, _opmode, t.iv)
 
     # Perform encryption
     # some libraries require the initialization vector to be
     # prepended to the plaintext before encryption.
-    if iv_prepend:  # If True, prepend the IV
-        ciphertext = cipher.encrypt(bytes(iv) + padded_plaintext)
+    if t.iv_prepend:  # If True, prepend the IV
+        ciphertext = cipher.encrypt(bytes(t.iv) + padded_plaintext)
     else:
         ciphertext = cipher.encrypt(padded_plaintext)
 
@@ -77,28 +63,12 @@ def encrypt(
     return base64.encode_base64(ciphertext)
 
 
-def decrypt(
-    ciphertext, key, key_size, salt, mode,
-    iv, halg=CIPHER_DEFAULT_HMHASHALG,
-    pbkdf2_iter=CIPHER_DEFAULT_PBKDF2_ITER,
-    iv_prepend=CIPHER_DEFAULT_IV_PREPEND
-):
+def decrypt(t: Toxin):
     """ This function perform AES block cipher decryption.
-
-    Arguments:
-    ciphertext: cipher-text data
-    key: Cipher's key (bytes[])
-    key_size: Algorithm key size
-    salt: Salt used to enhance hash security (bytes[])
-    mode: Block cipher operation mode
-    iv: Block cipher initialization vector (bytes[])
-    halg: PBKDF2 HMAC algorithm
-    pbkdf2_iter: Number of iterations for the key-derivation function
-    iv_prepend: Prepend Initialization Vector (IV) to the plain-text
     """
     # Decode the ciphertext using base64.
     try:
-        ciphertext = base64.decode_base64(ciphertext)
+        ciphertext = base64.decode_base64(t.ciphertext)
     except base64.base64.binascii.Error:
         log.error("Cannot decode ciphertext input using base64.")
         raise SystemExit
@@ -109,20 +79,21 @@ def decrypt(
         raise SystemExit
 
     # Determine the block-cipher operation mode.
-    op_mode = _cipher_opmode(mode)
+    op_mode = _cipher_opmode(t.opmode)
 
     # Call the key-derivation function
-    derived_key = pbkdf2.derive_key(key, key_size, halg, pbkdf2_iter, salt)
+    derived_key = pbkdf2.derive_key(
+        t.key, t.key_size, t.pbkdf2_halg, t.pbkdf2_iter, t.salt)
 
     # Create a new AES cipher
-    cipher = Crypto.Cipher.AES.new(derived_key, op_mode, iv)
+    cipher = Crypto.Cipher.AES.new(derived_key, op_mode, t.iv)
 
     # Perform decryption
     plaintext = cipher.decrypt(ciphertext)
 
     # If iv-prepending is True truncate the inizialization vector
     # from the returned plaintext.
-    if iv_prepend:
+    if t.iv_prepend:
         plaintext = plaintext[CIPHER_BLOCK_BLKSZ_AES:]
 
     # Removes the PKCS#7 padding bytes.

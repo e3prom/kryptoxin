@@ -1,0 +1,10 @@
+{# decrypt-only.jinja #}
+{#
+    This Jinja2 template includes the base64 decoding and
+    decryption routines only.
+#}
+$base64EncData = "{{ ciphertext }}"
+{# Perform base64 decoding #}
+{% include "powershell/decode/base64.jinja" %}
+{# Perform decryption #}
+{% include "powershell/decrypt/aes-system.jinja" %}

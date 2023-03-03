@@ -1,4 +1,4 @@
 """
-kryptoxin ciphers module.
-This is the ciphers module of the kryptoxin project.
+kryptoxin crypto module.
+This is the crypto module of the kryptoxin project.
 """

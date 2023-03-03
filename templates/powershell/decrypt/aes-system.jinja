@@ -1,0 +1,42 @@
+{# aes-system.jinja #}
+{#
+    This Jinja2 template includes the PowerShell decryption routines.
+    It leverages the .NET System.Security class for AES decryption
+#}
+Add-Type -AssemblyName System.Security
+
+function Decrypt-AES256PBKDF2HMAC {
+    param (
+        [byte[]]$Key,
+        [byte[]]$Ciphertext
+    )
+    $aesManaged = New-Object System.Security.Cryptography.AesManaged
+    $aesManaged.BlockSize = 128
+    $aesManaged.KeySize = 256
+    $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC
+    $aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::PKCS7
+    $aesManaged.Key = $Key
+    $aesManaged.IV = $Ciphertext[0..15]
+    $decryptor = $aesManaged.CreateDecryptor()
+    $plaintext = $decryptor.TransformFinalBlock($Ciphertext, 16, $Ciphertext.Length - 16)
+    $aesManaged.Clear()
+    
+    return $plaintext
+}
+
+function Derive-KeyPBKDF2HMAC {
+    param (
+        [string]$Password,
+        [byte[]]$Salt,
+        [int]$Iterations = 10000
+    )
+    $rfc2898DeriveBytes = New-Object System.Security.Cryptography.Rfc2898DeriveBytes($Password, $Salt, $Iterations)
+    $key = $rfc2898DeriveBytes.GetBytes(32)
+    return $key
+}
+
+$password = "{{ password }}"
+#$iv = [byte[]]({{ iv }})
+$salt = [byte[]]({{ salt }})
+$key = Derive-KeyPBKDF2HMAC -Password $password -Salt $salt
+$data = Decrypt-AES256PBKDF2HMAC -key $key -Ciphertext $data

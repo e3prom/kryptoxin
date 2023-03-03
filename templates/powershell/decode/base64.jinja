@@ -1,0 +1,13 @@
+{# base64.jinja #}
+{#
+    This Jinja2 template includes the PowerShell base64 decoding functions.
+#}
+function ConvertFrom-Base64ToByteArray {
+    param (
+        [string]$base64EncData
+    )
+    $bytes = [System.Convert]::FromBase64String($base64EncData)
+    return $bytes
+}
+
+$data = ConvertFrom-Base64ToByteArray -base64EncData $base64EncData

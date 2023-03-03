@@ -98,8 +98,6 @@ class TestCli(unittest.TestCase):
             '--salt', salt, '--hmac', 'sha256',
             '--iter', '50000'])
 
-        print(decrypt_res.output)
-
         # Check results
         if not decrypt_res.exception:
             # read original input file in non-binary mode
@@ -113,6 +111,7 @@ class TestCli(unittest.TestCase):
             # if an exception arise during decryption
             # print the error.
             print(f"{decrypt_res.exception}")
+            raise SystemError
 
 
 if __name__ == '__main__':
