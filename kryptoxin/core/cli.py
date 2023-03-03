@@ -115,7 +115,7 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
 
     # Templates handling.
     if lang == LANG_POWERSHELL:
-        output = bytes((powershell.render_test(tx)), 'UTF-8')
+        output = bytes((powershell.render_print(tx)), 'UTF-8')
     else:
         output = tx.ciphertext
 

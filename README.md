@@ -17,6 +17,7 @@
     - [Read and Encrypt from a file](#read-and-encrypt-from-a-file)
     - [Encrypt using AES-128-CBC](#encrypt-using-aes-128-cbc)
   - [Documentation](#documentation)
+  - [Disclaimer](#disclaimer)
   - [License](#license)
 
 ## Description
@@ -27,13 +28,13 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 
 ## Features
 
-The features below are currently supported, or are planned to be released in the near future:
+The features below are currently supported:
 
 - Provides encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
 - Provides decryption of base64 encoded ciphertext.
 - Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes`.
-- Generates compact, portable scripts or source codes as outputs for the below programming languages (not yet available):
-  - [ ] PowerShell
+- Generates compact, portable scripts or source codes as outputs for the below programming languages:
+  - [x] PowerShell
   - [ ] C
   - [ ] C++
   - [ ] C# (.NET)
@@ -89,6 +90,10 @@ Z+1df03i+mSayvEFYB+rmB55N4dYoz7Rbr2LhzNjqH8=
 ## Documentation
 
 You can directly visit the [online documentation](https://e3prom.github.io/kryptoxin/) or build it locally using the `make docs` command.
+
+## Disclaimer
+
+The `kryptoxin` program is distributed "AS IS" without any warranty or conditions of any kind. Under no circumstances can the developers, maintainers, or contributors be held responsible for the improper use of this software. Any damages or consequences resulting from the direct or indirect operation of this software cannot be attributed to the above-mentioned individuals or organizations. All opinions and knowledge expressed in the source codes, documentation, templates and examples are provided for educational and demonstration purposes only. By using this software you agree to the terms expressed therein.
 
 ## License
 
