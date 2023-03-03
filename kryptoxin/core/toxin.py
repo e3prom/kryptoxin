@@ -40,18 +40,18 @@ class Toxin:
         self.key = key
         self.key_size = key_size
         self.opmode = opmode
-        # re-encode initialization vector
+        # read initialization vector from hex
         if type(iv) is str:
-            iv = bytes(iv, 'UTF-8')
+            iv = bytes.fromhex(iv)
         self.iv = iv
         self.random_iv = random_iv
         # if randomization option is Enabled: perform IV randomization
         if self.random_iv is True:
             self.iv = gen_rand_bytes(CIPHER_BLOCK_BLKSZ_AES)
         self.iv_prepend = iv_prepend
-        # re-encode salt
+        # read salt from hex
         if type(salt) is str:
-            salt = bytes(salt, 'UTF-8')
+            salt = bytes.fromhex(salt)
         self.salt = salt
         self.random_salt = random_salt
         # if salt is to be randomized

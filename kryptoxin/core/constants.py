@@ -20,9 +20,9 @@ CIPHER_PBKDF2_AES128_KS = 16
 CIPHER_PBKDF2_AES192_KS = 24
 CIPHER_PBKDF2_AES256_KS = 32
 # Default Salt (all-zeros)
-CIPHER_DEFAULT_SALT = bytes(CIPHER_BLOCK_BLKSZ_AES)
+CIPHER_DEFAULT_SALT = "0" * (CIPHER_BLOCK_BLKSZ_AES * 2)
 # Default Block Cipher's Initialization Vector (IV)
-CIPHER_DEFAULT_IV = bytes(CIPHER_BLOCK_BLKSZ_AES)
+CIPHER_DEFAULT_IV = "0" * (CIPHER_BLOCK_BLKSZ_AES * 2)
 # Block Cipher Operation mode
 CIPHER_BLOCK_OPERMODE_CBC = "cbc"       # Cipher Block Chaining
 CIPHER_BLOCK_OPERMODE_CFB = "cfb"       # Cipher Feedback

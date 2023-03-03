@@ -35,8 +35,8 @@ class TestCli(unittest.TestCase):
         """
         in_file = _TEST_TXTFILE_PATH
         key = '12345'
-        iv = 'A' * 16
-        salt = 'B' * 16
+        iv = 'A' * 32
+        salt = 'B' * 32
         runner = CliRunner()
         result = runner.invoke(cli.encrypt, [
                                '--key', key, '--in', in_file,
@@ -45,7 +45,7 @@ class TestCli(unittest.TestCase):
                                '--salt', salt, '--hmac', 'sha256',
                                '--iter', '50000'])
         self.assertEqual(
-            result.output, "nY8lsP+MabdA8ErXQP/M3wyuJX4ZaM3GVFEKA2nHOms=\n")
+            result.output, "ybIQbSAiCWV2QZek32j2aISQcrh26icdk7mOnxkqwLI=\n")
 
     def test_cli_encrypt_binfile(self):
         """
@@ -54,8 +54,8 @@ class TestCli(unittest.TestCase):
         """
         in_file = _TEST_BINFILE_PATH
         key = '12345'
-        iv = 'A' * 16
-        salt = 'B' * 16
+        iv = 'A' * 32
+        salt = 'B' * 32
         runner = CliRunner()
         result = runner.invoke(cli.encrypt, [
                                '--key', key, '--in', in_file,
@@ -63,10 +63,10 @@ class TestCli(unittest.TestCase):
                                '--mode', 'cbc', '--iv', iv,
                                '--salt', salt, '--hmac', 'sha256',
                                '--iter', '50000'])
-        self.assertEqual(result.output, "nY8lsP+MabdA8ErXQP/M385ln0QlbcTF/Wa90"
-                                        "X4DZLPG5w8308pRq9H72Tg1+hQKuSlJ8YrsQR"
-                                        "/oWFkSiCQ8S81MwhOgE1Fc4OjIrrntWsrdqJf"
-                                        "v8CwaHnkt339CwmGE\n")
+        self.assertEqual(result.output, "ybIQbSAiCWV2QZek32j2aNO6T2Z2ep5tIMsx"
+                                        "FOwKU2JJVCGYrrpwmV847omewU/X3cnDbt1k"
+                                        "pYD/e06CYIZRiMTuNtjj/Jj9Visr+LSoZjbL"
+                                        "jHpFZyaWcDBulturFYuj\n")
 
     def test_cli_decrypt_txtfile(self):
         """
@@ -75,8 +75,8 @@ class TestCli(unittest.TestCase):
         in_file = _TEST_TXTFILE_PATH
         ct_file = _TEST_CTTMPFILE_PATH
         key = '12345'
-        iv = 'A' * 16
-        salt = 'B' * 16
+        iv = 'A' * 32
+        salt = 'B' * 32
         runner = CliRunner()
 
         # First perform encryption
