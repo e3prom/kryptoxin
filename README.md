@@ -11,11 +11,12 @@
   - [Features](#features)
   - [Installation](#installation)
     - [With pip (latest release)](#with-pip-latest-release)
-    - [With git (latest release)](#with-git-latest-release)
+    - [With git (v0.9.5)](#with-git-v095)
   - [Usages](#usages)
     - [Read, Encrypt and Decrypt from stdin](#read-encrypt-and-decrypt-from-stdin)
     - [Read and Encrypt from a file](#read-and-encrypt-from-a-file)
     - [Encrypt using AES-128-CBC](#encrypt-using-aes-128-cbc)
+    - [Generate a PowerShell "print" script](#generate-a-powershell-print-script)
   - [Documentation](#documentation)
   - [Disclaimer](#disclaimer)
   - [License](#license)
@@ -53,13 +54,13 @@ The below features are supported:
 pip install kryptoxin
 ```
 
-### With git (latest release)
+### With git (v0.9.5)
 
 ``` sh
 git clone https://github.com/e3prom/kryptoxin
 cd kryptoxin
 git checkout tags/0.9.5
-sudo python setup.py install
+sudo make install
 ```
 
 ## Usages
@@ -86,6 +87,18 @@ tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
 ``` {sh .no-copy}
 $ echo -n 'test' | python -m kryptoxin encrypt -k 12345 --alg aes --key_size 128 --mode CBC
 gtsUB3pIqtJk/dSqm6phrA==
+```
+
+### Generate a PowerShell "print" script
+
+``` {sh .no-copy}
+$ python -m kryptoxin encrypt -k secret --random-iv --random-salt --lang powershell --action print
+This is a secret!
+2023-03-04 17:33:42,287 - INFO - The Initialization Vector (IV) is: c15c8447204e9025a8ef1e4dd2ea80da
+2023-03-04 17:33:42,287 - INFO - The PBKDF2 Salt is: 85858c9115145be223d36750464b8026
+
+$base64EncData = "3Ud7pHQPm/qWOjgtuNOXP2WclPMxz6VuhfRTnwNXDyg="
+[...]
 ```
 
 ## Documentation
