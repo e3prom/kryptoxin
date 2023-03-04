@@ -41,13 +41,8 @@ _cmd_opts_crypto = [
                  help="Block Cipher operation mode"),
     click.option('--iv', default=CIPHER_DEFAULT_IV,
                  help="Block Cipher initialization vector (iv)"),
-    click.option('--random-iv/--static-iv', default=CIPHER_DEFAULT_RANDOMIV,
-                 help="Use a randomized or an all-zeros IV"),
     click.option('--salt', default=CIPHER_DEFAULT_SALT,
                  help="Password hashing algorithm's salt"),
-    click.option('--random-salt/--static-salt',
-                 default=CIPHER_DEFAULT_RANDOMIV,
-                 help="Use a randomized or an all-zeros Salt"),
     click.option('-h', '--hmac',
                  default=CIPHER_DEFAULT_HMHASHALG, show_default=True,
                  type=click.Choice(['SHA1', 'SHA256', 'SHA512'],
@@ -57,12 +52,6 @@ _cmd_opts_crypto = [
                  default=CIPHER_DEFAULT_PBKDF2_ITER, show_default=True,
                  type=click.IntRange(0, 1000000),
                  help="PBKDF2 iteration count"),
-    click.option('-l', '--lang',
-                 type=click.Choice(['powershell'], case_sensitive=False),
-                 help="Output programming language"),
-    click.option('-t', '--type',
-                 type=click.Choice(['script'], case_sensitive=False),
-                 help="Encrypted object type")
 ]
 
 
@@ -84,8 +73,16 @@ def cli(**kwargs):
 
 @ cli.command()
 @ _add_cmd_options(_cmd_opts_crypto)
+@click.option('--random-iv/--static-iv', default=CIPHER_DEFAULT_RANDOMIV,
+              help="Use a randomized or an all-zeros IV")
+@click.option('--random-salt/--static-salt', default=CIPHER_DEFAULT_RANDOMIV,
+              help="Use a randomized or an all-zeros Salt")
+@click.option('-l', '--lang',
+              type=click.Choice(['powershell'], case_sensitive=False),
+              help="Output programming language")
+@click.option('-a', '--action', help="Action to perform (e,g. print)")
 def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
-            hmac, input_file, output_file, pbkdf2_iter, lang, type):
+            hmac, input_file, output_file, pbkdf2_iter, lang, action):
     """ This command perform encryption on the supplied input.
     It reads on stdin or the file supplied by the '--in' option.
     See Options below for more information.
@@ -100,9 +97,9 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
         raise SystemExit
 
     # Create Toxin object
-    tx = Toxin(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
-               pbkdf2_iter, hmac, CIPHER_DEFAULT_IV_PREPEND,
-               plaintext=plaintext)
+    tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
+               hmac, CIPHER_DEFAULT_IV_PREPEND, plaintext=plaintext,
+               random_iv=random_iv, random_salt=random_salt)
 
     # Call encryption function.
     tx.ciphertext = aes.encrypt(tx)
@@ -113,9 +110,17 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     if tx.random_salt is True:
         log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
 
-    # Templates handling.
+    # Templates handling
     if lang == LANG_POWERSHELL:
-        output = bytes((powershell.render_print(tx)), 'UTF-8')
+        # if the supplied action is available.
+        if action in powershell.actions:
+            output = bytes((powershell.actions[action](tx)), 'UTF-8')
+        elif action is None:
+            log.error("Please specify a template action.")
+            raise SystemExit
+        else:
+            log.error(f"Unknown template action '{action}'.")
+            raise SystemExit
     else:
         output = tx.ciphertext
 
@@ -129,8 +134,8 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
 
 @ cli.command()
 @ _add_cmd_options(_cmd_opts_crypto)
-def decrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
-            hmac, input_file, output_file, pbkdf2_iter, lang, type):
+def decrypt(alg, key, key_size, opmode, iv, salt, hmac,
+            input_file, output_file, pbkdf2_iter):
     """ This command perform decryption on the supplied input.
     It reads on stdin or the file supplied by the '--in' option.
     See Options below for more information.
@@ -145,9 +150,8 @@ def decrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
         raise SystemExit
 
     # Create Toxin object
-    tx = Toxin(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
-               pbkdf2_iter, hmac, CIPHER_DEFAULT_IV_PREPEND,
-               ciphertext=ciphertext)
+    tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
+               hmac, CIPHER_DEFAULT_IV_PREPEND, ciphertext=ciphertext)
 
     # Call decryption function.
     tx.plaintext = aes.decrypt(tx)

@@ -4,7 +4,7 @@ Kryptoxin is a software written in Python and can be easily installed by cloning
 
 ## Installation
 
-### Using pip <small>recommended</small> { #using-pip data-toc-label="using pip" }
+### With pip <small>recommended</small> { #with-pip data-toc-label="with pip" }
 
 Open up a terminal and install Kryptoxin using pip:
 
@@ -13,31 +13,31 @@ Open up a terminal and install Kryptoxin using pip:
     ``` sh
     pip install kryptoxin
     ```
-=== "0.9.4"
+=== "0.9.5"
 
     ``` sh
-    pip install kryptoxin==0.9.4
+    pip install kryptoxin==0.9.5
     ```
 
 The above commands will automatically install all the required dependencies.
 
-### Using git { #using-source data-toc-label="using git" }
+### With git { #with-source data-toc-label="with git" }
 
-First make sure you have `git` installed. Fetch the source code from the official Kryptoxin repository, and install the required the dependencies:
+First make sure you have `git` installed. Then, fetch the source code from the official [Kryptoxin repository](https://github.com/e3prom/kryptoxin), next checkout the latest release and finally install the `kryptoxin` module and its dependencies on your system.
 
 === "Latest Development"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
     cd kryptoxin
-    python setup.py install
+    sudo make install
     ```
 
-=== "0.9.4"
+=== "0.9.5"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
     cd kryptoxin
-    git checkout tags/0.9.4
-    python setup.py install
+    git checkout tags/0.9.5
+    sudo make install
     ```

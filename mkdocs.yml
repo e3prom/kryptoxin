@@ -93,7 +93,9 @@ nav:
         - License: license.md
     - Getting started:
         - Installation: getting-started.md
-        - Usages: usages.md
+        - Basic Usages: usages.md
+        - Templates:
+            - PowerShell: powershell.md
         - Disclaimer: disclaimer.md
     - Reference: reference.md
     - Support: support.md

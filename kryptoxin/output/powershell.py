@@ -42,3 +42,7 @@ def render_print(t: Toxin):
                            iv=_iv, salt=_salt)
 
 
+# functions mapping
+actions = {
+    "print": render_print
+}

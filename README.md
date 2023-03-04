@@ -11,7 +11,7 @@
   - [Features](#features)
   - [Installation](#installation)
     - [With pip (latest release)](#with-pip-latest-release)
-    - [With git (development version)](#with-git-development-version)
+    - [With git (latest release)](#with-git-latest-release)
   - [Usages](#usages)
     - [Read, Encrypt and Decrypt from stdin](#read-encrypt-and-decrypt-from-stdin)
     - [Read and Encrypt from a file](#read-and-encrypt-from-a-file)
@@ -22,9 +22,9 @@
 
 ## Description
 
-Kryptoxin is a Python tool allowing you to quickly and easily generate encrypted payloads. It supports various object types and various programming languages. This software is intended for use in the security field for storing encrypted objects on target hosts. It can also be used for concealing scripts and binary objects from scrutiny.
+Kryptoxin is a Python tool allowing you to quickly and easily generate encrypted payloads. This software is primarily intended for use in the security field for storing encrypted objects on target hosts. It can also be used for concealing scripts and binary objects from scrutiny.
 
-The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`, `hidden` or `secret` in Greek) and the word `Toxin` (meaning `poison`). As the name implies, the intended goal of this project is to provide a fast and efficient way of concealing or hiding payloads such as implants, thus avoiding AV and EDR detection. Most of our templates are "living off the land", using libraries and encryption routines commonly found in base operating systems installations.
+The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`, `hidden` or `secret` in Greek) and the word `Toxin` (meaning `poison`). As the name implies, the intended goal of this project is to provide a fast and efficient way of concealing or hiding payloads such as implants, thus avoiding AV and EDR detection. Most of our templates are "living off the land", using system libraries and encryption routines commonly found in base operating systems installations.
 
 ## Features
 
@@ -53,12 +53,13 @@ The below features are supported:
 pip install kryptoxin
 ```
 
-### With git (development version)
+### With git (latest release)
 
 ``` sh
 git clone https://github.com/e3prom/kryptoxin
 cd kryptoxin
-sudo make install
+git checkout tags/0.9.5
+sudo python setup.py install
 ```
 
 ## Usages
@@ -66,11 +67,10 @@ sudo make install
 ### Read, Encrypt and Decrypt from stdin
 
 ``` {sh .no-copy}
-$ echo -n 'test' | python -m kryptoxin encrypt -k 1234
-tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
+$ echo -n 'test' | python -m kryptoxin encrypt -k 12345
+5bP32GKoJa57IcKL4sWeUQ==
 
-$ echo -n 'tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=' | \
-> python -m kryptoxin decrypt -k 12345
+$ echo -n '5bP32GKoJa57IcKL4sWeUQ==' | python -m kryptoxin decrypt -k 12345
 test
 ```
 
@@ -85,7 +85,7 @@ tRQYHkQkS9Z7z7i7rzmJSPTuOfE2UUUERsR9CRtdwSM=
 
 ``` {sh .no-copy}
 $ echo -n 'test' | python -m kryptoxin encrypt -k 12345 --alg aes --key_size 128 --mode CBC
-Z+1df03i+mSayvEFYB+rmB55N4dYoz7Rbr2LhzNjqH8=
+gtsUB3pIqtJk/dSqm6phrA==
 ```
 
 ## Documentation
@@ -94,7 +94,7 @@ You can directly visit the [online documentation](https://e3prom.github.io/krypt
 
 ## Disclaimer
 
-The `kryptoxin` program is distributed "AS IS" without any warranty or conditions of any kind. Under no circumstances can the developers, maintainers, or contributors be held responsible for the improper use of this software. Any damages or consequences resulting from the direct or indirect operation of this software cannot be attributed to the above-mentioned individuals or organizations. All opinions and knowledge expressed in the source codes, documentation, templates and examples are provided for educational and demonstration purposes only. By using this software you agree to the terms expressed therein.
+This program is distributed "AS IS" without any warranty or conditions of any kind. Under no circumstances can the developers, maintainers, or contributors be held responsible for the improper use of this software. Any damages or consequences resulting from the direct or indirect operation of this software cannot be attributed to the above-mentioned individuals or organizations. All opinions and knowledge expressed in the source codes, documentation, templates and examples are provided for educational and demonstration purposes only. By using this software you agree to the terms expressed therein.
 
 ## License
 
