@@ -117,7 +117,7 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
         log.info(f"The Initialization Vector (IV) is: {tx.get_iv_hexstring()}")
     if tx.random_salt:
         log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
-    
+
     # Templates handling
     # PowerShell
     if lang == LANG_POWERSHELL:

@@ -36,7 +36,7 @@ def render_print(t: Toxin):
     _salt = gen_compat_hexstring(t.salt)
 
     template = env.get_template(
-        tmpl_action_rpath + "/print" + JINA_TEMPLATES_FEXT)
+        tmpl_action_rpath + "print" + JINA_TEMPLATES_FEXT)
 
     return template.render(ciphertext=_ciphertext, mode=t.opmode,
                            password=_password, iv=_iv, salt=_salt,
