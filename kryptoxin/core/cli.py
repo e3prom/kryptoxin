@@ -51,7 +51,7 @@ _cmd_opts_crypto = [
     click.option('--iter', 'pbkdf2_iter',
                  default=CIPHER_DEFAULT_PBKDF2_ITER, show_default=True,
                  type=click.IntRange(0, 1000000),
-                 help="PBKDF2 iteration count"),
+                 help="PBKDF2 iteration count")
 ]
 
 
@@ -82,8 +82,11 @@ def cli(**kwargs):
                                 case_sensitive=False),
               help="Output programming language")
 @click.option('-a', '--action', help="Action to perform (e,g. print)")
+@click.option('--show-key/--hide-key', default=CLI_DISPLAYKEY,
+              help="Display the generated key")
 def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
-            hmac, input_file, output_file, pbkdf2_iter, lang, action):
+            hmac, input_file, output_file, pbkdf2_iter, lang, action,
+            show_key):
     """ This command perform encryption on the supplied input.
     It reads on stdin or the file supplied by the '--in' option.
     See Options below for more information.
@@ -105,12 +108,16 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     # Call encryption function.
     tx.ciphertext = aes.encrypt(tx)
 
-    # If IV / Salt randmization is enabled, output the value in hex.
-    if tx.random_iv is True:
-        log.info(f"The Initialization Vector (IV) is: {tx.get_iv_hexstring()}")
-    if tx.random_salt is True:
-        log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
+    # If given or generated key is to be displayed.
+    if show_key:
+        log.info(f"The AES encryption key is: {tx.get_dkey_hexstring()}")
 
+    # If IV / Salt randmization is enabled, output the value in hex.
+    if tx.random_iv:
+        log.info(f"The Initialization Vector (IV) is: {tx.get_iv_hexstring()}")
+    if tx.random_salt:
+        log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
+    
     # Templates handling
     # PowerShell
     if lang == LANG_POWERSHELL:

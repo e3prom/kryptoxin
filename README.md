@@ -16,7 +16,7 @@
     - [Read, Encrypt and Decrypt from stdin](#read-encrypt-and-decrypt-from-stdin)
     - [Read and Encrypt from a file](#read-and-encrypt-from-a-file)
     - [Encrypt using AES-128-CBC](#encrypt-using-aes-128-cbc)
-    - [Generate a PowerShell "print" script](#generate-a-powershell-print-script)
+    - [Generate a PowerShell `print` script](#generate-a-powershell-print-script)
   - [Documentation](#documentation)
   - [Disclaimer](#disclaimer)
   - [License](#license)
@@ -88,7 +88,7 @@ $ echo -n 'test' | python -m kryptoxin encrypt -k 12345 --alg aes --key_size 128
 gtsUB3pIqtJk/dSqm6phrA==
 ```
 
-### Generate a PowerShell "print" script
+### Generate a PowerShell `print` script
 
 ``` {sh .no-copy}
 $ python -m kryptoxin encrypt -k secret --random-iv --random-salt --lang powershell --action print

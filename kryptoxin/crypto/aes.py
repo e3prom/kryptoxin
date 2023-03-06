@@ -45,11 +45,11 @@ def encrypt(t: Toxin):
     padded_plaintext = t.plaintext + bytes([padding] * padding)
 
     # call the key-derivation function
-    derived_key = pbkdf2.derive_key(
+    t.derived_key = pbkdf2.derive_key(
         t.key, t.key_size, t.pbkdf2_halg, t.pbkdf2_iter, t.salt)
 
     # Create new AES cipher
-    cipher = Crypto.Cipher.AES.new(derived_key, _opmode, t.iv)
+    cipher = Crypto.Cipher.AES.new(t.derived_key, _opmode, t.iv)
 
     # Perform encryption
     # some libraries require the initialization vector to be
@@ -87,11 +87,11 @@ def decrypt(t: Toxin):
     op_mode = _cipher_opmode(t.opmode)
 
     # Call the key-derivation function
-    derived_key = pbkdf2.derive_key(
+    t.derived_key = pbkdf2.derive_key(
         t.key, t.key_size, t.pbkdf2_halg, t.pbkdf2_iter, t.salt)
 
     # Create a new AES cipher
-    cipher = Crypto.Cipher.AES.new(derived_key, op_mode, t.iv)
+    cipher = Crypto.Cipher.AES.new(t.derived_key, op_mode, t.iv)
 
     # Perform decryption
     plaintext = cipher.decrypt(ciphertext)

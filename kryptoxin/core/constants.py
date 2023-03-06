@@ -4,6 +4,8 @@ This module defines the various program-wide constants.
 """
 
 PROGRAM_NAME = 'Kryptoxin'
+# CLI parameters
+CLI_DISPLAYKEY = False                   # Display generated key on the console
 # Cipher Parameters- Defaults
 CIPHER_DEFAULT_ALGORITHM = "aes"        # Default encryption algorithm
 CIPHER_DEFAULT_KEYSIZE = 256            # Default block cipher key-size

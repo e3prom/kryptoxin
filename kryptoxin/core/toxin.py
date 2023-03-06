@@ -62,6 +62,14 @@ class Toxin:
         self.pbkdf2_halg = pbkdf2_halg
         self.plaintext = plaintext
         self.ciphertext = ciphertext
+        # derived key
+        # automatically generated a random one
+        self.derived_key = gen_rand_bytes(int(CIPHER_PBKDF2_AES256_KS / 8))
+
+    def get_dkey_hexstring(self):
+        """ This method return the derived in a hex string
+        """
+        return self.derived_key.hex()
 
     def get_iv_hexstring(self):
         """ This method return the IV in a hex string
