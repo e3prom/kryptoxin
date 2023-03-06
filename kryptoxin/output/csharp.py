@@ -1,9 +1,9 @@
 """
-kryptoxin powershell output module.
-This module contains functions for the powershell outputs
+kryptoxin C# output module.
+This module contains functions for the C# outputs
 """
 from ..core.toxin import Toxin
-from ..core.constants import JINJA_TEMPLATES_PS, JINJA_TEMPLATES_ACTSDIR, \
+from ..core.constants import JINJA_TEMPLATES_CSHARP, JINJA_TEMPLATES_ACTSDIR, \
     JINA_TEMPLATES_FEXT
 from . import get_jinja_env
 
@@ -11,14 +11,7 @@ from . import get_jinja_env
 env = get_jinja_env()
 
 # Actions templates directories string
-tmpl_action_rpath = JINJA_TEMPLATES_PS + JINJA_TEMPLATES_ACTSDIR
-
-
-def gen_compat_hexstring(array):
-    """ This function generate a hexadecimal string of bytes
-        compatible with PowerShell scripts.
-    """
-    return ", ".join('0x' + format(x, "02X") for x in array)
+tmpl_action_rpath = JINJA_TEMPLATES_CSHARP + JINJA_TEMPLATES_ACTSDIR
 
 
 def render_print(t: Toxin):
@@ -32,8 +25,8 @@ def render_print(t: Toxin):
     # cast ciphertext to string
     _ciphertext = str(t.ciphertext, 'UTF-8')
     _password = str(t.key, 'UTF-8')
-    _iv = gen_compat_hexstring(t.iv)
-    _salt = gen_compat_hexstring(t.salt)
+    _iv = t.get_iv_hexstring()
+    _salt = t.get_salt_hexstring()
 
     template = env.get_template(
         tmpl_action_rpath + "/print" + JINA_TEMPLATES_FEXT)

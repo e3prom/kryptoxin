@@ -38,7 +38,7 @@ The below features are supported:
 - Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` objects.
 - Generates compact, portable scripts or source codes as outputs for the below programming languages:
   - [x] PowerShell
-  - [ ] C# (.NET)
+  - [x] C# (.NET)
   - [ ] C++
   - [ ] C
 - Implement key derivation functions, such as `PBKDF2`.

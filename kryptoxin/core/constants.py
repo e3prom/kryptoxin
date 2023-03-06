@@ -30,6 +30,7 @@ CIPHER_BLOCK_OPERMODE_OFB = "ofb"       # Output Feedback
 CIPHER_BLOCK_OPERMODE_EAX = "eax"       # Encrypt-Authenticate-Translate
 # Languages
 LANG_POWERSHELL = "powershell"          # PowerShell cmd-line option string
+LANG_CSHARP = "csharp"                  # C# cmd-line option string
 # Jinja Templates
 JINJA_TEMPLATES_DIR = "templates"       # Jinja2 template directory
 JINJA_TEMPLATES_PS = "powershell/"      # PowerShell templates directory

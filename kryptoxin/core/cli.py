@@ -8,7 +8,7 @@ from .constants import *
 from .log import log
 from .toxin import Toxin
 from ..crypto import aes
-from ..output import unformatted, powershell
+from ..output import unformatted, powershell, csharp
 
 
 # Sub-class of click.Group
@@ -78,7 +78,8 @@ def cli(**kwargs):
 @click.option('--random-salt/--static-salt', default=CIPHER_DEFAULT_RANDOMIV,
               help="Use a randomized or an all-zeros Salt")
 @click.option('-l', '--lang',
-              type=click.Choice(['powershell'], case_sensitive=False),
+              type=click.Choice(['powershell', 'csharp'],
+                                case_sensitive=False),
               help="Output programming language")
 @click.option('-a', '--action', help="Action to perform (e,g. print)")
 def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
@@ -111,16 +112,25 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
         log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
 
     # Templates handling
+    # PowerShell
     if lang == LANG_POWERSHELL:
-        # if the supplied action is available.
         if action in powershell.actions:
             output = bytes((powershell.actions[action](tx)), 'UTF-8')
         elif action is None:
-            log.error("Please specify a template action.")
+            log.error("Please specify a PowerShell script action.")
             raise SystemExit
         else:
             log.error(f"Unknown template action '{action}'.")
             raise SystemExit
+    # C#
+    elif lang == LANG_CSHARP:
+        if action in csharp.actions:
+            output = bytes((csharp.actions[action](tx)), 'UTF-8')
+        elif action is None:
+            log.error("Please specify a C# program action.")
+            raise SystemExit
+        else:
+            log.error(f"Unknown template action '{action}'.")
     else:
         output = tx.ciphertext
 

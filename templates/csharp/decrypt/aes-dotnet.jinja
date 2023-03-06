@@ -1,0 +1,33 @@
+{# aes-dotnet.jinja #}
+{#
+    This Jinja2 template includes the C# decryption routines.
+    It leverages the .NET System.Security.Cryptography class for AES decryption
+#}
+    public static string DecryptAES(byte[] encryptedBytes, int keySize, string password, int iter, byte[]salt, byte[]iv)
+    {
+        using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iter))
+        {
+            byte[] keyBytes = pbkdf2.GetBytes(keySize / 8);
+
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = keyBytes;
+                aes.IV = iv;
+                aes.Mode = CipherMode.{{ mode }};
+                aes.Padding = PaddingMode.PKCS7;
+
+                ICryptoTransform decryptor = aes.CreateDecryptor();
+
+                using (MemoryStream ms = new MemoryStream(encryptedBytes))
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader sr = new StreamReader(cs))
+                        {
+                            return sr.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+    }

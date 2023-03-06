@@ -1,0 +1,33 @@
+{# print.jinja #}
+{#
+    This Jinja2 template includes a C# print script.
+#}
+using System.Security.Cryptography;
+
+class Program
+{
+    {# Include hex string to byte array conversion function #}
+    {% include "csharp/transform/hexstr2bytearray.jinja" %}
+    {# Include AES decryption function #}
+    {% include "csharp/decrypt/aes-dotnet.jinja" %}
+
+    static void Main(string[] args)
+    {
+        string password = "{{ password }}";
+        int iterations = {{ iter }};
+        int keySize = {{ key_size }};
+
+        string salt = "{{ salt }}";
+        string iv = "{{ iv }}";
+        byte[] saltBytes = HexStringToByteArray(salt);
+        byte[] ivBytes = HexStringToByteArray(iv);
+
+        string encryptedMessage = "{{ ciphertext }}";
+        byte[] encryptedBytes = Convert.FromBase64String(encryptedMessage);
+
+        string decryptedData;
+
+        decryptedData = DecryptAES(encryptedBytes, keySize, password, iterations, saltBytes, ivBytes);
+        Console.WriteLine(decryptedData);
+    }
+}

@@ -1,0 +1,15 @@
+{# hexstr2bytearray.jinja #}
+{#
+    This Jinja2 template includes a C# Hexadecimal to Byte Array
+    conversion function.
+#}
+    public static byte[] HexStringToByteArray(string hexString)
+    {
+        int numBytes = hexString.Length / 2;
+        byte[] bytes = new byte[numBytes];
+        for (int i = 0; i < numBytes; i++)
+        {
+            bytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+        }
+        return bytes;
+    }
