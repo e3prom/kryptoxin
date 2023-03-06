@@ -23,9 +23,9 @@
 
 ## Description
 
-Kryptoxin is a Python tool allowing you to quickly and easily generate encrypted payloads. This software is primarily intended for use in the security field for storing encrypted objects on target hosts. It can also be used for concealing scripts and binary objects from scrutiny.
+Kryptoxin is a Python tool allowing you to generate encrypted payloads effortlessly. This software is primarily intended for use in the security field for storing encrypted objects on target hosts. It can also be used for concealing scripts and binary objects from scrutiny.
 
-The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`, `hidden` or `secret` in Greek) and the word `Toxin` (meaning `poison`). As the name implies, the intended goal of this project is to provide a fast and efficient way of concealing or hiding payloads such as implants, thus avoiding AV and EDR detection. Most of our templates are "living off the land", using system libraries and encryption routines commonly found in base operating systems installations.
+The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`, `hidden` or `secret` in Greek) and the word `Toxin` (meaning `poison`). As the name implies, the intended goal of this project is to provide a fast and efficient way of concealing or hiding payloads, thus saving you a lot of time and effort. Most of our templates are "living off the land", using system libraries and encryption routines commonly found in base operating systems installations.
 
 ## Features
 
@@ -34,15 +34,14 @@ The below features are supported:
 - Provides block-cipher encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
 - Supports user-specifiable key sizes and block-cipher modes of operations, such as `AES256-CBC`.
 - Generate random cryptographic parameters such as `Initialization Vector` and `Salt`.
-- Encodes and properly formats variables for a fast and streamlined copy/paste experience.
+- Encodes and properly formats variables for fast and streamlined copy/paste operations.
 - Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` objects.
 - Generates compact, portable scripts or source codes as outputs for the below programming languages:
   - [x] PowerShell
-  - [ ] C
-  - [ ] C++
   - [ ] C# (.NET)
-- Supports multiple block cipher algorithms, key sizes and modes of operations, such as `AES256-CBC`.
-- Implement the key derivation functions, such as `PBKDF2`.
+  - [ ] C++
+  - [ ] C
+- Implement key derivation functions, such as `PBKDF2`.
 - Supports out-of-band key storage, with conditional trigger mechanisms (not yet available).
 - Includes scripts and source code templates to be used for security-related tasks and experimentation.
 

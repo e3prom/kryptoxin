@@ -23,7 +23,7 @@ The above commands will automatically install all the required dependencies.
 
 ### With git { #with-source data-toc-label="with git" }
 
-First make sure you have `git` installed. Then, fetch the source code from the official [Kryptoxin repository](https://github.com/e3prom/kryptoxin), next checkout the latest release and finally install the `kryptoxin` module and its dependencies on your system.
+First make sure you have `git` installed. Then, fetch the source code from the official [Kryptoxin repository](https://github.com/e3prom/kryptoxin), next checkout the latest production release and finally install the `kryptoxin` module and all its dependencies system-wide:
 
 === "Latest Development"
 

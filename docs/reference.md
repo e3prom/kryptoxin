@@ -65,5 +65,5 @@ When using templates, you must specify the output programming language and the d
 * Output Programming Language (`-l`, `--lang`)
     * `powershell`
 * Action (`-a`, `--action`)
-    * Powerhell Script
+    * PowerShell Script
         * `print`: Print the plaintext directly onto the console after decryption.

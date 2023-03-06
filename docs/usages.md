@@ -1,7 +1,5 @@
 # Usages
 
-Kryptoxin can be used in a wide variety of scenarios and contexts.
-
 To use Kryptoxin, pass the `kryptoxin` module to your Python interpreter using the `python -m kryptoxin` command. You can use the `--help` command-line parameter at any given time to lists the available options for a specific command:
 
 ``` { .sh .no-copy }
