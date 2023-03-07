@@ -41,29 +41,35 @@ The options listed below allow you to control the various cryptographic paramete
 * Encryption Key (`-k`, `--key`)
 * Key Size (`-s`, `--key_size`)
     * Support between 256 and 4096 bits keys.
-* Encryption Algorithms (`-a`, `--alg`)
+* Encryption Algorithms (`-a`, `--alg`):
     * Advanced Encryption Standard: `AES`
-* Block Cipher Mode of Operations (`-m`, `--mode`)
+* Block Cipher Mode of Operations (`-m`, `--mode`):
     * Cipher Block Chaining: `CBC`
     * Cipher Feedback: `CFB`
     * Output FeedBack: `OFB`
     * Encrypt-then-Authenticate-then-Translate: `EAX`
-* Initialization Vector (`--iv`)
+* Initialization Vector (`--iv`):
     * Generate a random iv: `--random-iv`
-* Salt (`--salt`)
+* Salt (`--salt`):
     * Generate a random salt: `--random-salt`
-* Hash-based Message Authentication Code Algorithms (`-h`, `--hmac`)
+* Hash-based Message Authentication Code Algorithms (`-h`, `--hmac`):
     * `SHA1`
     * `SHA256`
     * `SHA512`
 * PBKDF2 Iteration Count (`--iter`)
+* Show generated AES key (`--show-key`)
+
 
 ### Templates Options
 
 When using templates, you must specify the output programming language and the desired action.
 
-* Output Programming Language (`-l`, `--lang`)
-    * `powershell`
-* Action (`-a`, `--action`)
-    * PowerShell Script
-        * `print`: Print the plaintext directly onto the console after decryption.
+* Output Programming Languages (`-l`, `--lang`):
+    * PowerShell: `powershell`
+    * C#: `csharp`
+* Actions (`-a`, `--action`):
+    * PowerShell Scripts:
+        * `custom`: A base template for writing custom scripts.
+        * `print`: A script returning a UTF-8 encoded text to the console.
+    * C# Programs and Libraries:
+        * `print`: A console program that print the encrypted text.

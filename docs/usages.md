@@ -14,7 +14,7 @@ Commands:
   decrypt  This command perform decryption on the supplied input.
 ```
 
-At this time of writing, Kryptoxin supports the `encrypt` and `decrypt` commands. As their name implies they are used to respectively perform encryption and decryption of the given input.
+At this time of writing, Kryptoxin supports the `encrypt` and `decrypt` commands. As their name implies they are used to respectively perform encryption and decryption of a given input.
 
 ## Encryption (`encrypt`)
 
@@ -48,7 +48,7 @@ The commands below perform encryption using the default parameters and options:
     - `python -m kryptoxin` calls the `kryptoxin` module, which should be in your `sys.path` after installation.
     - The `-k 12345` option provide the encryption key to be passed to the block cipher algorithm.
     - Finally, `-i input_file.txt` specify the input file to read from, here a text file.
-    - Alternatively, you can use the standard Unix/Linux pipes to redirect the output to the standard input.
+    - Alternatively, you can use the standard Unix/Linux pipes to redirect the output to the standard input or the other way around.
     
     Once the encryption operation is performed, Kryptoxin will return a base64 encoded output by default. The latter can be copy/pasted into variables, or can be stored in a file by using the `-o` or `--out` command-line option.
 
@@ -65,7 +65,7 @@ $ python -m kryptoxin encrypt --key 12345 --key_size 128 \
 ```
 
 ??? question "What the above command-line options do ?"
-    For this example we use the `AES` block cipher algorithm with a 128-bits key. We also specify the `SHA256` digest algorithm for the `HMAC` function. The block cipher operation mode is `CBC` and its initialization vector is manually specified. The latter must matches the block cipher's block size, which is 16 bytes. Finally, the output is written to the file specified by the `--out` command-line option.
+    For this example we use the `AES` block cipher algorithm with a 128-bits key. We also specify the `SHA256` digest algorithm for the `HMAC` function. The block cipher operation mode is `CBC` and its initialization vector is manually specified. The latter must match the block cipher's block size, which is here 16 bytes. Finally, the output is written to the file specified by the `--out` command-line option.
 
 ## Decryption (`decrypt`)
 

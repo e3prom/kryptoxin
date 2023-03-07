@@ -6,7 +6,6 @@ copyright: Copyright &copy; 2023 Nicolas Chabbey
 theme:
     name: material
     features:
-        #- content.action.edit
         - content.action.view
         - content.code.copy
         - content.code.select
@@ -36,8 +35,8 @@ theme:
             icon: material/brightness-4
             name: Switch to light mode
     font:
-        text: Hack
-        code: DejaVu Sans Mono
+        text: Ubuntu Sans
+        code: Roboto Mono
 plugins:
     - search:
         separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
@@ -91,11 +90,12 @@ nav:
     - Home:
         - Overview: index.md
         - License: license.md
+        - Disclaimer: disclaimer.md
     - Getting started:
         - Installation: getting-started.md
         - Basic Usages: usages.md
         - Templates:
             - PowerShell: powershell.md
-        - Disclaimer: disclaimer.md
+            - C#: csharp.md
     - Reference: reference.md
     - Support: support.md
