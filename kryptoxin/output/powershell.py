@@ -21,6 +21,28 @@ def gen_compat_hexstring(array):
     return ", ".join('0x' + format(x, "02X") for x in array)
 
 
+def render_custom(t: Toxin):
+    """ This function return the PowerShell custom script.
+
+    Arguments:
+     - ciphertext: the base64 encoded ciphertext (bytes[])
+     - password: the password or key (bytes[])
+    """
+    # cast ciphertext to string
+    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _password = str(t.key, 'UTF-8')
+    _iv = gen_compat_hexstring(t.iv)
+    _salt = gen_compat_hexstring(t.salt)
+
+    template = env.get_template(
+        tmpl_action_rpath + "custom" + JINA_TEMPLATES_FEXT)
+
+    return template.render(ciphertext=_ciphertext, mode=t.opmode,
+                           password=_password, iv=_iv, salt=_salt,
+                           iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
+                           key_size=t.key_size)
+
+
 def render_print(t: Toxin):
     """ This function return a PowerShell print script.
         It simply prints the decrypted plaintext to the console.
@@ -46,5 +68,6 @@ def render_print(t: Toxin):
 
 # functions mapping
 actions = {
-    "print": render_print
+    "custom": render_custom,
+    "print": render_print,
 }
