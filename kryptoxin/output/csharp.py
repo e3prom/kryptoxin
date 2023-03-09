@@ -15,7 +15,7 @@ tmpl_action_rpath = JINJA_TEMPLATES_CSHARP + JINJA_TEMPLATES_ACTSDIR
 
 
 def render_print(t: Toxin):
-    """ This function return a PowerShell print script.
+    """ This function return a C# print console program.
         It simply prints the decrypted plaintext to the console.
 
     Arguments:
@@ -34,10 +34,34 @@ def render_print(t: Toxin):
     return template.render(ciphertext=_ciphertext, mode=t.opmode,
                            password=_password, iv=_iv, salt=_salt,
                            iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
-                           key_size=t.key_size)
+                           key_size=t.key_size, action=t.action)
+
+
+def render_load_dll(t: Toxin):
+    """ This function return a C# load-dll console program.
+        It writes a decrypted DLL to disk and then load it.
+
+    Arguments:
+     - ciphertext: the base64 encoded ciphertext (bytes[])
+     - password: the password or key (bytes[])
+    """
+    # cast ciphertext to string
+    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _password = str(t.key, 'UTF-8')
+    _iv = t.get_iv_hexstring()
+    _salt = t.get_salt_hexstring()
+
+    template = env.get_template(
+        tmpl_action_rpath + "load-dll" + JINA_TEMPLATES_FEXT)
+
+    return template.render(ciphertext=_ciphertext, mode=t.opmode,
+                           password=_password, iv=_iv, salt=_salt,
+                           iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
+                           key_size=t.key_size, action=t.action)
 
 
 # functions mapping
 actions = {
-    "print": render_print
+    "print": render_print,
+    "load-dll": render_load_dll
 }

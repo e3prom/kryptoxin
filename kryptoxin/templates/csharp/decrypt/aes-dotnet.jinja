@@ -3,7 +3,7 @@
     This Jinja2 template includes the C# decryption routines.
     It leverages the .NET System.Security.Cryptography class for AES decryption
 #}
-    public static string DecryptAES(byte[] encryptedBytes, int keySize, string password, int iter, byte[]salt, byte[]iv)
+    public static {%if action == 'print'%}string{%else%}byte[]{% endif %} DecryptAES(byte[] encryptedBytes, int keySize, string password, int iter, byte[]salt, byte[]iv)
     {
         using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iter))
         {
@@ -18,6 +18,7 @@
 
                 ICryptoTransform decryptor = aes.CreateDecryptor();
 
+                {% if action == 'print' %}
                 using (MemoryStream ms = new MemoryStream(encryptedBytes))
                 {
                     using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
@@ -28,6 +29,18 @@
                         }
                     }
                 }
+                {% else %}
+                using (MemoryStream ms = new MemoryStream(encryptedBytes))
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (BinaryReader br = new BinaryReader(cs))
+                        {
+                                return br.ReadBytes((int)encryptedBytes.Length);
+                        }
+                    }
+                }
+                {% endif %}
             }
         }
     }

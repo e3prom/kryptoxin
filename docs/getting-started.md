@@ -13,7 +13,7 @@ Open up a terminal and install Kryptoxin using pip:
     ``` sh
     pip install kryptoxin
     ```
-=== "0.9.6"
+=== "v0.9.6"
 
     ``` sh
     pip install kryptoxin==0.9.6
@@ -33,7 +33,7 @@ First make sure you have `git` installed. Then, fetch the source code from the o
     sudo make install
     ```
 
-=== "0.9.6"
+=== "v0.9.6"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin

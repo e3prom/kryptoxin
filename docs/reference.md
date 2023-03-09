@@ -73,3 +73,4 @@ When using templates, you must specify the output programming language and the d
         * `print`: A script returning a UTF-8 encoded text to the console.
     * C# Programs and Libraries:
         * `print`: A console program that print the encrypted text.
+        * `load-dll`: This console program loads a decrypted DLL to disk and load it under an existing `explorer.exe` process.

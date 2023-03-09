@@ -103,7 +103,7 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     # Create Toxin object
     tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
                hmac, CIPHER_DEFAULT_IV_PREPEND, plaintext=plaintext,
-               random_iv=random_iv, random_salt=random_salt)
+               random_iv=random_iv, random_salt=random_salt, action=action)
 
     # Call encryption function.
     tx.ciphertext = aes.encrypt(tx)
