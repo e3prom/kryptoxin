@@ -9,7 +9,7 @@ $base64EncData = "{{ ciphertext }}"
 {# Perform decryption #}
 {% include "powershell/decrypt/aes-dotnet.jinja" %}
 
-$asm = [System.Reflection.Assembly]::Load($data)
+$asm = [System.Reflection.Assembly]::Load([byte[]]$data)
 {% if args.type is defined %}
 $class = $asm.GetType("{{args.type}}")
 {% else %}

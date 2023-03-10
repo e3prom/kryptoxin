@@ -50,7 +50,7 @@ This template generates a PowerShell script that load a COFF-based object into m
 
 ``` sh
 python -m kryptoxin encrypt -k 123456 --random-iv --random-salt --lang powershell --action load_asm \
---type=TestLibrary --method=run --in TestLibrary.dll
+--type=TestLibraryClass.Class1 --method=run --in TestLibrary.dll
 ```
 
 ## Custom Script (`custom`)
