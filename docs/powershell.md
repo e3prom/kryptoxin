@@ -55,7 +55,7 @@ python -m kryptoxin encrypt -k 123456 --random-iv --random-salt \
 --method=run # (2)!
 ```
 
-1. Give the namespace and the object class of your library or portable executable.
+1. Specify the namespace and the object class of your library or portable executable.
 2. Specify the class' method to invoke from PowerShell where code execution begins.
 
 ## Custom Script (`custom`)

@@ -14,6 +14,29 @@ env = get_jinja_env()
 tmpl_action_rpath = JINJA_TEMPLATES_CSHARP + JINJA_TEMPLATES_ACTSDIR
 
 
+def render_custom(t: Toxin):
+    """ This function return the C# custom program or library.
+
+    Arguments:
+     - ciphertext: the base64 encoded ciphertext (bytes[])
+     - password: the password or key (bytes[])
+    """
+    # cast ciphertext to string
+    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _password = str(t.key, 'UTF-8')
+    _iv = t.get_iv_hexstring()
+    _salt = t.get_salt_hexstring()
+
+    template = env.get_template(
+        tmpl_action_rpath + "custom" + JINA_TEMPLATES_FEXT)
+
+    return template.render(ciphertext=_ciphertext, mode=t.opmode,
+                           password=_password, iv=_iv, salt=_salt,
+                           iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
+                           key_size=t.key_size, action=t.action,
+                           args=t.uargs)
+
+
 def render_print(t: Toxin):
     """ This function return a C# print console program.
         It simply prints the decrypted plaintext to the console.
@@ -63,6 +86,7 @@ def render_load_lib(t: Toxin):
 
 # functions mapping
 actions = {
+    "custom": render_custom,
     "print": render_print,
     "load-library": render_load_lib
 }

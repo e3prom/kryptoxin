@@ -40,7 +40,7 @@ def render_custom(t: Toxin):
     return template.render(ciphertext=_ciphertext, mode=t.opmode,
                            password=_password, iv=_iv, salt=_salt,
                            iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
-                           key_size=t.key_size)
+                           key_size=t.key_size, args=t.uargs)
 
 
 def render_load_asm(t: Toxin):
