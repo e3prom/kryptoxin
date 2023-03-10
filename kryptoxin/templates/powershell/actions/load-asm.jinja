@@ -16,7 +16,7 @@ $class = $asm.GetType("{{args.type}}")
 $class = $asm.GetType("ClassLibrary.Class")
 {% endif %}
 {% if args.method is defined %}
-$method = $class.GetMethod(args.method)
+$method = $class.GetMethod("{{args.method}}")
 {% else %} 
 $method = $class.GetMethod("runner")
 {% endif %}
