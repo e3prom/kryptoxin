@@ -43,15 +43,20 @@ function Decrypt-AES256PBKDF2HMAC { (4)!
 
 ## Load Assembly (`load-asm`)
 
-This template generates a PowerShell script that load a COFF-based object into memory, such as a compiled .dll. It then loads the given object type and method provided by the `--type=` and `--method=` command-line arguments respectively.
+This template generates a PowerShell script that load a COFF-based object into memory, such as a compiled .dll. It then loads the given class type and method provided by the `--type=` and `--method=` command-line arguments respectively.
 
 !!! info "This script runs entirely in memory"
-    This script and all it's content runs entirely from memory, therefore it's a pretty good candidate script for loading payloads that may trigger AV and EDR inspection. Please note however, that [AMSI](https://learn.microsoft.com/windows/win32/amsi/antimalware-scan-interface-portal) may still flag this script.
+    This script and all it's content runs entirely from memory, therefore it's a pretty good candidate script for loading payloads that may trigger on-disk AV and EDR inspection. Please note however, that [AMSI](https://learn.microsoft.com/windows/win32/amsi/antimalware-scan-interface-portal) may still flag this script.
 
 ``` sh
-python -m kryptoxin encrypt -k 123456 --random-iv --random-salt --lang powershell --action load_asm \
---type=TestLibraryClass.Class1 --method=run --in TestLibrary.dll
+python -m kryptoxin encrypt -k 123456 --random-iv --random-salt \
+--lang powershell --action load_asm --in TestLibrary.dll \
+--type=TestLibraryClass.Class1 # (1)! \
+--method=run # (2)!
 ```
+
+1. Give the namespace and the object class of your library or portable executable.
+2. Specify the class' method to invoke from PowerShell where code execution begins.
 
 ## Custom Script (`custom`)
 
