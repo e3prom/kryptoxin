@@ -41,6 +41,18 @@ function Decrypt-AES256PBKDF2HMAC { (4)!
 4. The AES decryption routine is generated and can be called to decrypt the data.
 5. The decrypted data, here an UTF-8 encoded string is read and should be printed onto the console.
 
+## Load Assembly (`load-asm`)
+
+This template generates a PowerShell script that load a COFF-based object into memory, such as a compiled .dll. It then loads the given object type and method provided by the `--type=` and `--method=` command-line arguments respectively.
+
+!!! info "This script runs entirely in memory"
+    This script and all it's content runs entirely from memory, therefore it's a pretty good candidate script for loading payloads that may trigger AV and EDR inspection. Please note however, that [AMSI](https://learn.microsoft.com/windows/win32/amsi/antimalware-scan-interface-portal) may still flag this script.
+
+``` sh
+python -m kryptoxin encrypt -k 123456 --random-iv --random-salt --lang powershell --action load_asm \
+--type=TestLibrary --method=run --in TestLibrary.dll
+```
+
 ## Custom Script (`custom`)
 
 The `custom` template is provided as a reference and starting point for a custom script of your liking. Simply edit the `custom.jinja` file located in the `/kryptoxin/templates/powershell/action` directory in your default installation location. By default, the `$data` variable is used at every steps to hold the decoded and decrypted data. Finally, call the template using the `--action custom` command-line parameter.

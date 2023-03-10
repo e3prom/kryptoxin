@@ -37,7 +37,7 @@ def render_print(t: Toxin):
                            key_size=t.key_size, action=t.action)
 
 
-def render_load_dll(t: Toxin):
+def render_load_lib(t: Toxin):
     """ This function return a C# load-dll console program.
         It writes a decrypted DLL to disk and then load it.
 
@@ -52,16 +52,17 @@ def render_load_dll(t: Toxin):
     _salt = t.get_salt_hexstring()
 
     template = env.get_template(
-        tmpl_action_rpath + "load-dll" + JINA_TEMPLATES_FEXT)
+        tmpl_action_rpath + "load-library" + JINA_TEMPLATES_FEXT)
 
     return template.render(ciphertext=_ciphertext, mode=t.opmode,
                            password=_password, iv=_iv, salt=_salt,
                            iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
-                           key_size=t.key_size, action=t.action)
+                           key_size=t.key_size, action=t.action,
+                           args=t.uargs)
 
 
 # functions mapping
 actions = {
     "print": render_print,
-    "load-dll": render_load_dll
+    "load-library": render_load_lib
 }

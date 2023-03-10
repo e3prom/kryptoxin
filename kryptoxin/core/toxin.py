@@ -11,7 +11,7 @@ class Toxin:
     def __init__(self,
                  alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
                  pbkdf2_halg, iv_prepend, plaintext=None, ciphertext=None,
-                 random_iv=False, random_salt=False, action=None
+                 random_iv=False, random_salt=False, action=None, uargs=None
                  ):
         """ Toxin type constructor
 
@@ -67,6 +67,8 @@ class Toxin:
         self.derived_key = gen_rand_bytes(int(CIPHER_PBKDF2_AES256_KS / 8))
         # template action
         self.action = action
+        # unknown arguments dictionary
+        self.uargs = uargs
 
     def get_dkey_hexstring(self):
         """ This method return the derived in a hex string

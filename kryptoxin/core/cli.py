@@ -71,7 +71,9 @@ def cli(**kwargs):
     pass
 
 
-@ cli.command()
+@click.command(context_settings=dict(
+    ignore_unknown_options=True, allow_extra_args=True
+))
 @ _add_cmd_options(_cmd_opts_crypto)
 @click.option('--random-iv/--static-iv', default=CIPHER_DEFAULT_RANDOMIV,
               help="Use a randomized or an all-zeros IV")
@@ -84,13 +86,17 @@ def cli(**kwargs):
 @click.option('-a', '--action', help="Action to perform (e,g. print)")
 @click.option('--show-key/--hide-key', default=CLI_DISPLAYKEY,
               help="Display the generated key")
-def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
+@click.pass_context
+def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
             hmac, input_file, output_file, pbkdf2_iter, lang, action,
             show_key):
     """ This command perform encryption on the supplied input.
     It reads on stdin or the file supplied by the '--in' option.
     See Options below for more information.
     """
+    # build a directory for unknown arguments
+    uargs = dict([arg.strip('--').split('=') for arg in ctx.args])
+
     # Read provided file and catch errors if any.
     try:
         plaintext = input_file.read()
@@ -103,7 +109,8 @@ def encrypt(alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     # Create Toxin object
     tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
                hmac, CIPHER_DEFAULT_IV_PREPEND, plaintext=plaintext,
-               random_iv=random_iv, random_salt=random_salt, action=action)
+               random_iv=random_iv, random_salt=random_salt,
+               action=action, uargs=uargs)
 
     # Call encryption function.
     tx.ciphertext = aes.encrypt(tx)

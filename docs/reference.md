@@ -70,7 +70,12 @@ When using templates, you must specify the output programming language and the d
 * Actions (`-a`, `--action`):
     * PowerShell Scripts:
         * `custom`: A base template for writing custom scripts.
-        * `print`: A script returning a UTF-8 encoded text to the console.
+        * `load-asm`: Load a COFF-based image such as a .DLL to memory.
+            *  `--type`: Name of the object's type to get from the library.
+          *  `--method`: Library object's method to invoke for execution.
+        * `print`: Return an UTF-8 encoded text to the console.
     * C# Programs and Libraries:
         * `print`: A console program that print the encrypted text.
-        * `load-dll`: This console program loads a decrypted DLL to disk and load it under an existing `explorer.exe` process.
+        * `load-library`: This console program loads a **decrypted** DLL to disk and load it under an existing `explorer.exe` process.
+            * `--dllname`: The filename of the DLL as written to the host's disk.
+            * `--process`: Existing process name to execute under.

