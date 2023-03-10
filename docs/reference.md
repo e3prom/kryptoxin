@@ -59,7 +59,6 @@ The options listed below allow you to control the various cryptographic paramete
 * PBKDF2 Iteration Count (`--iter`)
 * Show generated AES key (`--show-key`)
 
-
 ### Templates Options
 
 When using templates, you must specify the output programming language and the desired action.
@@ -75,6 +74,7 @@ When using templates, you must specify the output programming language and the d
           *  `--method`: Library object's method to invoke for execution.
         * `print`: Return an UTF-8 encoded text to the console.
     * C# Programs and Libraries:
+        * `custom`: A base template for your custom program or library.
         * `print`: A console program that print the encrypted text.
         * `load-library`: This console program loads a **decrypted** DLL to disk and load it under an existing `explorer.exe` process.
             * `--dllname`: The filename of the DLL as written to the host's disk.
