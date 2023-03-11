@@ -13,7 +13,7 @@ The `print` template generates a basic printing script. The latter can be used t
 The below example shows a PowerShell script which include a base64 decoding function and a routine to perform AES decryption; both using system libraries only. This script can be readily copy/pasted to a windows host. Upon execution, it will print the encrypted message to the console.
 
 ``` sh
-$ python -m kryptoxin encrypt -k s3cret --random-iv --random-salt \
+python -m kryptoxin encrypt -k s3cret --random-iv --random-salt \
 --lang powershell --action print
 ```
 
