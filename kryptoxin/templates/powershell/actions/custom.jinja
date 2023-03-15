@@ -3,7 +3,7 @@
     This Jinja2 template can be used a starting point
     for a custom PowerShell script.
 #}
-$base64EncData = "{{ ciphertext }}"
+$base64EncData  = {{ ciphertext }}
 {# Perform base64 decoding #}
 {% include "powershell/decode/base64.jinja" %}
 {# Perform decryption #}

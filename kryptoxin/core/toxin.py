@@ -84,3 +84,25 @@ class Toxin:
         """ This method return the Salt in a hex string
         """
         return self.salt.hex()
+
+    def get_ciphertext(self, lang=None, width=54, tab_width=17, var_name=None):
+        """ This method return the formatted ciphertext
+        """
+        self.ciphertext = str(self.ciphertext, 'UTF-8')
+
+        tab = " " * tab_width
+        ciph = ""
+
+        if lang == LANG_POWERSHELL:
+            for i in range(0, len(self.ciphertext), width):
+                if i > 0:
+                    if var_name:
+                        ciph += var_name + " += "
+                    else:
+                        ciph += tab
+                ciph += format(f"\"{self.ciphertext[i:i + width]}\"\n")
+
+        else:
+            ciph = format(f"\"{self.ciphertext}\"")
+
+        return ciph

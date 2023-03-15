@@ -22,7 +22,7 @@ def render_custom(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext()
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()
@@ -46,7 +46,7 @@ def render_print(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext()
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()
@@ -69,7 +69,7 @@ def render_load_lib(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext()
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()

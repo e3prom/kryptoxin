@@ -4,7 +4,7 @@ This module contains functions for the powershell outputs
 """
 from ..core.toxin import Toxin
 from ..core.constants import JINJA_TEMPLATES_PS, JINJA_TEMPLATES_ACTSDIR, \
-    JINA_TEMPLATES_FEXT
+    JINA_TEMPLATES_FEXT, LANG_POWERSHELL
 from . import get_jinja_env
 
 # Create Jinja2 environment variable
@@ -29,7 +29,7 @@ def render_custom(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext(lang=LANG_POWERSHELL)
     _password = str(t.key, 'UTF-8')
     _iv = gen_compat_hexstring(t.iv)
     _salt = gen_compat_hexstring(t.salt)
@@ -52,7 +52,8 @@ def render_load_asm(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext(
+        lang=LANG_POWERSHELL, var_name="$base64EncData")
     _password = str(t.key, 'UTF-8')
     _iv = gen_compat_hexstring(t.iv)
     _salt = gen_compat_hexstring(t.salt)
@@ -75,7 +76,8 @@ def render_print(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = str(t.ciphertext, 'UTF-8')
+    _ciphertext = t.get_ciphertext(
+        lang=LANG_POWERSHELL, var_name="$base64EncData")
     _password = str(t.key, 'UTF-8')
     _iv = gen_compat_hexstring(t.iv)
     _salt = gen_compat_hexstring(t.salt)
