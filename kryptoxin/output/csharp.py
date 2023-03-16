@@ -88,5 +88,6 @@ def render_load_lib(t: Toxin):
 actions = {
     "custom": render_custom,
     "print": render_print,
-    "load-library": render_load_lib
+    "load-library": render_load_lib,
+    "load-dll": render_load_lib
 }
