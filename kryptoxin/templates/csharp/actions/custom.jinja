@@ -17,8 +17,14 @@ class Program
     {# Include AES decryption function #}
     {% include "csharp/decrypt/aes-dotnet.jinja" %}
 
-    //static void Main(string[] args)
-    //{
-    //   return 0;
-    //}
+    static void Main(string[] args)
+    {
+       string ciphertext = {{ ciphertext }}
+       byte[] encryptedBytes = Convert.FromBase64String(ciphertext);
+
+       byte[] decryptedData;
+       decryptedData = DecryptAES(encryptedBytes, keySize, password, iterations, saltBytes, ivBytes);
+
+       return 0;
+    }
 }

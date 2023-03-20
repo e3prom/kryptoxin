@@ -86,14 +86,15 @@ class Toxin:
         return self.salt.hex()
 
     def get_ciphertext(self, lang=None, width=54, tab_width=17, var_name=None):
-        """ This method return the formatted ciphertext
+        """ This method return a formatted ciphertext
         """
         self.ciphertext = str(self.ciphertext, 'UTF-8')
 
         tab = " " * tab_width
         ciph = ""
 
-        if lang == LANG_POWERSHELL:
+        # PowerShell
+        if lang == LANG_POWERSHELL and len(self.ciphertext) > width:
             for i in range(0, len(self.ciphertext), width):
                 if i > 0:
                     if var_name:
@@ -101,7 +102,24 @@ class Toxin:
                     else:
                         ciph += tab
                 ciph += format(f"\"{self.ciphertext[i:i + width]}\"\n")
+        # C#
+        elif lang == LANG_CSHARP:
+            # if not multi lines width
+            if len(self.ciphertext) < width:
+                return format(f"\"{self.ciphertext}\";")
 
+            for i in range(0, len(self.ciphertext), width):
+                # if it's the start of the ciphertext variable
+                if i == 0:
+                    ciph += "@"
+                # handle decoration around the variable construct
+                if i > len(self.ciphertext) - width - 1:
+                    ciph += tab + \
+                        format(f"{self.ciphertext[i:i + width]}\";\n")
+                elif i > 0:
+                    ciph += tab + format(f"{self.ciphertext[i:i + width]}\n")
+                else:
+                    ciph += format(f"\"{self.ciphertext[i:i + width]}\n")
         else:
             ciph = format(f"\"{self.ciphertext}\"")
 

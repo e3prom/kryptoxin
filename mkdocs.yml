@@ -98,4 +98,5 @@ nav:
             - PowerShell: powershell.md
             - C#: csharp.md
     - Reference: reference.md
+    - Contribution: contrib.md
     - Support: support.md

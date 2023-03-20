@@ -4,7 +4,7 @@ This module contains functions for the C# outputs
 """
 from ..core.toxin import Toxin
 from ..core.constants import JINJA_TEMPLATES_CSHARP, JINJA_TEMPLATES_ACTSDIR, \
-    JINA_TEMPLATES_FEXT
+    JINA_TEMPLATES_FEXT, LANG_CSHARP
 from . import get_jinja_env
 
 # Create Jinja2 environment variable
@@ -22,7 +22,7 @@ def render_custom(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = t.get_ciphertext()
+    _ciphertext = t.get_ciphertext(lang=LANG_CSHARP, tab_width=29)
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()
@@ -46,7 +46,8 @@ def render_print(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = t.get_ciphertext()
+    _ciphertext = t.get_ciphertext(
+        lang=LANG_CSHARP, var_name="string encryptedMessage", tab_width=36)
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()
@@ -69,7 +70,8 @@ def render_load_lib(t: Toxin):
      - password: the password or key (bytes[])
     """
     # cast ciphertext to string
-    _ciphertext = t.get_ciphertext()
+    _ciphertext = t.get_ciphertext(
+        lang=LANG_CSHARP, var_name="string encryptedMessage", tab_width=30)
     _password = str(t.key, 'UTF-8')
     _iv = t.get_iv_hexstring()
     _salt = t.get_salt_hexstring()

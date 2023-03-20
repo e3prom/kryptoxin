@@ -23,7 +23,7 @@ class Program
         byte[] saltBytes = HexStringToByteArray(salt);
         byte[] ivBytes = HexStringToByteArray(iv);
 
-        string encryptedMessage = {{ ciphertext }};
+        string encryptedMessage = {{ ciphertext }}
         byte[] encryptedBytes = Convert.FromBase64String(encryptedMessage);
 
         string decryptedData;
