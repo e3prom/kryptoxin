@@ -4,7 +4,11 @@ This is the aes cipher module of the kryptoxin project.
 """
 from ..core.toxin import Toxin
 from ..core.log import log
-from ..core.constants import *
+from ..core.constants import CIPHER_BLOCK_OPERMODE_CBC
+from ..core.constants import CIPHER_BLOCK_OPERMODE_CFB
+from ..core.constants import CIPHER_BLOCK_OPERMODE_OFB
+from ..core.constants import CIPHER_BLOCK_OPERMODE_EAX
+from ..core.constants import CIPHER_BLOCK_BLKSZ_AES
 from . import base64, pbkdf2
 import Crypto.Cipher.AES
 

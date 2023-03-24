@@ -6,3 +6,9 @@ import os
 from . __version__ import __version__
 
 ROOT_DIR = os.path.abspath(__path__[0])
+
+
+def get_version():
+    """ This function simply returns the version string.
+    """
+    return __version__

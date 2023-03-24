@@ -4,7 +4,7 @@ This is the cli interface module of the kryptoxin project.
 """
 import click
 import sys
-from .constants import *
+from . import constants
 from .log import log
 from .toxin import Toxin
 from ..crypto import aes
@@ -27,29 +27,30 @@ _cmd_opts_crypto = [
     click.option('-o', '--out', 'output_file', type=click.File("wb"),
                  help="Output file"),
     click.option('-a', '--alg',
-                 default=CIPHER_DEFAULT_ALGORITHM, show_default=True,
+                 default=constants.CIPHER_DEFAULT_ALGORITHM, show_default=True,
                  type=click.Choice(['AES'], case_sensitive=False),
                  help="Encryption algorithm"),
     click.option('-k', '--key', required=True, help="Encryption key string"),
     click.option('-s', '--key_size',
-                 default=CIPHER_DEFAULT_KEYSIZE, show_default=True,
+                 default=constants.CIPHER_DEFAULT_KEYSIZE, show_default=True,
                  type=click.IntRange(0, 4096), help="Encryption key size"),
     click.option('-m', '--mode', 'opmode',
-                 default=CIPHER_DEFAULT_BLOCKMODE, show_default=True,
+                 default=constants.CIPHER_DEFAULT_BLOCKMODE, show_default=True,
                  type=click.Choice(['CBC', 'CFB', 'OFB', 'EAX'],
                                    case_sensitive=False),
                  help="Block Cipher operation mode"),
-    click.option('--iv', default=CIPHER_DEFAULT_IV,
+    click.option('--iv', default=constants.CIPHER_DEFAULT_IV,
                  help="Block Cipher initialization vector (iv)"),
-    click.option('--salt', default=CIPHER_DEFAULT_SALT,
+    click.option('--salt', default=constants.CIPHER_DEFAULT_SALT,
                  help="Password hashing algorithm's salt"),
     click.option('-h', '--hmac',
-                 default=CIPHER_DEFAULT_HMHASHALG, show_default=True,
+                 default=constants.CIPHER_DEFAULT_HMHASHALG, show_default=True,
                  type=click.Choice(['SHA1', 'SHA256', 'SHA512'],
                                    case_sensitive=False),
                  help="PBKDF2 HMAC algorithm"),
     click.option('--iter', 'pbkdf2_iter',
-                 default=CIPHER_DEFAULT_PBKDF2_ITER, show_default=True,
+                 default=constants.CIPHER_DEFAULT_PBKDF2_ITER,
+                 show_default=True,
                  type=click.IntRange(0, 1000000),
                  help="PBKDF2 iteration count")
 ]
@@ -66,7 +67,7 @@ def _add_cmd_options(options):
 
 
 @ click.group(cls=NaturalOrderCommands)
-@ click.version_option(prog_name=PROGRAM_NAME)
+@ click.version_option(prog_name=constants.PROGRAM_NAME)
 def cli(**kwargs):
     pass
 
@@ -75,16 +76,18 @@ def cli(**kwargs):
     ignore_unknown_options=True, allow_extra_args=True
 ))
 @ _add_cmd_options(_cmd_opts_crypto)
-@click.option('--random-iv/--static-iv', default=CIPHER_DEFAULT_RANDOMIV,
+@click.option('--random-iv/--static-iv',
+              default=constants.CIPHER_DEFAULT_RANDOMIV,
               help="Use a randomized or an all-zeros IV")
-@click.option('--random-salt/--static-salt', default=CIPHER_DEFAULT_RANDOMIV,
+@click.option('--random-salt/--static-salt',
+              default=constants.CIPHER_DEFAULT_RANDOMIV,
               help="Use a randomized or an all-zeros Salt")
 @click.option('-l', '--lang',
               type=click.Choice(['powershell', 'csharp'],
                                 case_sensitive=False),
               help="Output programming language")
 @click.option('-a', '--action', help="Action to perform (e,g. print)")
-@click.option('--show-key/--hide-key', default=CLI_DISPLAYKEY,
+@click.option('--show-key/--hide-key', default=constants.CLI_DISPLAYKEY,
               help="Display the generated key")
 @click.pass_context
 def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
@@ -108,7 +111,7 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
 
     # Create Toxin object
     tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
-               hmac, CIPHER_DEFAULT_IV_PREPEND, plaintext=plaintext,
+               hmac, constants.CIPHER_DEFAULT_IV_PREPEND, plaintext=plaintext,
                random_iv=random_iv, random_salt=random_salt,
                action=action, uargs=uargs)
 
@@ -127,7 +130,7 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
 
     # Templates handling
     # PowerShell
-    if lang == LANG_POWERSHELL:
+    if lang == constants.LANG_POWERSHELL:
         if action in powershell.actions:
             output = bytes((powershell.actions[action](tx)), 'UTF-8')
         elif action is None:
@@ -137,7 +140,7 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
             log.error(f"Unknown template action '{action}'.")
             raise SystemExit
     # C#
-    elif lang == LANG_CSHARP:
+    elif lang == constants.LANG_CSHARP:
         if action in csharp.actions:
             output = bytes((csharp.actions[action](tx)), 'UTF-8')
         elif action is None:
@@ -175,7 +178,8 @@ def decrypt(alg, key, key_size, opmode, iv, salt, hmac,
 
     # Create Toxin object
     tx = Toxin(alg, key, key_size, opmode, iv, salt, pbkdf2_iter,
-               hmac, CIPHER_DEFAULT_IV_PREPEND, ciphertext=ciphertext)
+               hmac, constants.CIPHER_DEFAULT_IV_PREPEND,
+               ciphertext=ciphertext)
 
     # Call decryption function.
     tx.plaintext = aes.decrypt(tx)

@@ -2,9 +2,10 @@
 kryptoxin PBKDF2  module.
 This is the key-derivation function PBKDF2 module of the kryptoxin project.
 """
-from ..core import log
-from ..core.constants import *
 import hashlib
+from ..core import log
+from ..core.constants import CIPHER_PBKDF2_AES128_KS, CIPHER_PBKDF2_AES192_KS
+from ..core.constants import CIPHER_PBKDF2_AES256_KS
 
 
 def derive_key(key, key_size, halg, iter, salt):
