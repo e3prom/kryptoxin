@@ -11,7 +11,7 @@
   - [Features](#features)
   - [Installation](#installation)
     - [With pip (latest release)](#with-pip-latest-release)
-    - [With git (v0.9.7)](#with-git-v097)
+    - [With git (v0.9.8)](#with-git-v098)
   - [Usages examples](#usages-examples)
     - [Read, encrypt and decrypt, all from stdin](#read-encrypt-and-decrypt-all-from-stdin)
     - [Encrypt using AES-128-CFB](#encrypt-using-aes-128-cfb)
@@ -52,12 +52,12 @@ The below features are supported:
 pip install kryptoxin
 ```
 
-### With git (v0.9.7)
+### With git (v0.9.8)
 
 ``` sh
 git clone https://github.com/e3prom/kryptoxin
 cd kryptoxin
-git checkout tags/0.9.7
+git checkout tags/0.9.8
 sudo make install
 ```
 
