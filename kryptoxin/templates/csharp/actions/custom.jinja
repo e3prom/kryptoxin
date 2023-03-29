@@ -22,6 +22,15 @@ class Program
        string ciphertext = {{ ciphertext }}
        byte[] encryptedBytes = Convert.FromBase64String(ciphertext);
 
+       string password = "{{ password }}";
+       int iterations = {{ iter }};
+       int keySize = {{ key_size }};
+       string salt = "{{ salt }}";
+       string iv = "{{ iv }}";
+
+       byte[] saltBytes = HexStringToByteArray(salt);
+       byte[] ivBytes = HexStringToByteArray(iv);
+
        byte[] decryptedData;
        decryptedData = DecryptAES(encryptedBytes, keySize, password, iterations, saltBytes, ivBytes);
 
