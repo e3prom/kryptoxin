@@ -2,14 +2,14 @@
 kryptoxin AES cipher module.
 This is the aes cipher module of the kryptoxin project.
 """
-from ..core.toxin import Toxin
-from ..core.log import log
-from ..core.constants import CIPHER_BLOCK_OPERMODE_CBC
-from ..core.constants import CIPHER_BLOCK_OPERMODE_CFB
-from ..core.constants import CIPHER_BLOCK_OPERMODE_OFB
-from ..core.constants import CIPHER_BLOCK_OPERMODE_EAX
-from ..core.constants import CIPHER_BLOCK_BLKSZ_AES
-from . import base64, pbkdf2
+from kryptoxin.core.toxin import Toxin
+from kryptoxin.core.log import log
+from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_CBC
+from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_CFB
+from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_OFB
+from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_EAX
+from kryptoxin.core.constants import CIPHER_BLOCK_BLKSZ_AES
+from kryptoxin.crypto import base64, pbkdf2
 import Crypto.Cipher.AES
 
 

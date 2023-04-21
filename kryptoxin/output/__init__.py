@@ -3,7 +3,7 @@ kryptoxin output module.
 This is the ouput module of the kryptoxin project.
 """
 from kryptoxin import ROOT_DIR
-from ..core.constants import JINJA_TEMPLATES_DIR
+from kryptoxin.core.constants import JINJA_TEMPLATES_DIR
 import jinja2
 
 

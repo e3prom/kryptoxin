@@ -4,11 +4,11 @@ This is the cli interface module of the kryptoxin project.
 """
 import click
 import sys
-from . import constants
-from .log import log
-from .toxin import Toxin
-from ..crypto import aes
-from ..output import unformatted, powershell, csharp
+from kryptoxin.core import constants
+from kryptoxin.core.log import log
+from kryptoxin.core.toxin import Toxin
+from kryptoxin.crypto import aes
+from kryptoxin.output import unformatted, powershell, csharp
 
 
 # Sub-class of click.Group

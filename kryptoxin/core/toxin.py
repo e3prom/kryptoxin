@@ -3,9 +3,10 @@ kryptoxin toxin module.
 This is the toxin module of the kryptoxin project
 where the Toxin object type is defined.
 """
-from .constants import CIPHER_BLOCK_BLKSZ_AES, CIPHER_PBKDF2_AES256_KS
-from .constants import LANG_POWERSHELL, LANG_CSHARP
-from ..crypto.random import gen_rand_bytes
+from kryptoxin.core.constants import CIPHER_BLOCK_BLKSZ_AES
+from kryptoxin.core.constants import CIPHER_PBKDF2_AES256_KS
+from kryptoxin.core.constants import LANG_POWERSHELL, LANG_CSHARP
+from kryptoxin.crypto.random import gen_rand_bytes
 
 
 class Toxin:

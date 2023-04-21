@@ -2,10 +2,11 @@
 kryptoxin powershell output module.
 This module contains functions for the powershell outputs
 """
-from ..core.toxin import Toxin
-from ..core.constants import JINJA_TEMPLATES_PS, JINJA_TEMPLATES_ACTSDIR, \
-    JINA_TEMPLATES_FEXT, LANG_POWERSHELL
-from . import get_jinja_env
+from kryptoxin.core.toxin import Toxin
+from kryptoxin.core.constants import JINJA_TEMPLATES_PS
+from kryptoxin.core.constants import JINJA_TEMPLATES_ACTSDIR
+from kryptoxin.core.constants import JINA_TEMPLATES_FEXT, LANG_POWERSHELL
+from kryptoxin.output import get_jinja_env
 
 # Create Jinja2 environment variable
 env = get_jinja_env()

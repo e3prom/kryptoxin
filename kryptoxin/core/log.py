@@ -12,7 +12,7 @@ def _init_logger():
     logger.setLevel(logging.DEBUG)
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s - %(levelname)s - %(message)s')
+    return logger
 
 
-_init_logger()
-log = logging.getLogger(__name__)
+log = _init_logger()
