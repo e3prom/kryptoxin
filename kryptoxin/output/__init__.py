@@ -17,5 +17,6 @@ def create_jinja_env() -> jinja2.Environment:
     """ Create the Jinja2 Environment
     """
     env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(ROOT_DIR + "/" + JINJA_TEMPLATES_DIR))
+        loader=jinja2.FileSystemLoader(ROOT_DIR + "/" + JINJA_TEMPLATES_DIR),
+        trim_blocks=True)
     return env

@@ -9,7 +9,7 @@ from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_CFB
 from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_OFB
 from kryptoxin.core.constants import CIPHER_BLOCK_OPERMODE_EAX
 from kryptoxin.core.constants import CIPHER_BLOCK_BLKSZ_AES
-from kryptoxin.crypto import base64, pbkdf2
+from kryptoxin.crypto import pbkdf2, base64
 import Crypto.Cipher.AES
 
 
@@ -68,12 +68,13 @@ def encrypt(t: Toxin):
     else:
         ciphertext = cipher.encrypt(padded_plaintext)
 
-    # Encode and return the ciphertext in base64.
-    return base64.encode_base64(ciphertext)
+    # Return the ciphertext
+    return ciphertext
 
 
 def decrypt(t: Toxin):
-    """ This function perform AES block cipher decryption.
+    """ This function perform AES block cipher decryption
+    on base64 encoded ciphertext.
     """
     # Decode the ciphertext using base64.
     try:

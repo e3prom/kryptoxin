@@ -6,7 +6,10 @@ where the Toxin object type is defined.
 from kryptoxin.core.constants import CIPHER_BLOCK_BLKSZ_AES
 from kryptoxin.core.constants import CIPHER_PBKDF2_AES256_KS
 from kryptoxin.core.constants import LANG_POWERSHELL, LANG_CSHARP
+from kryptoxin.core.constants import LANG_VBA
 from kryptoxin.crypto.random import gen_rand_bytes
+from kryptoxin.crypto.base64 import encode_base64
+from kryptoxin.core.conv import bytes2decarray
 
 
 class Toxin:
@@ -71,6 +74,8 @@ class Toxin:
         self.action = action
         # unknown arguments dictionary
         self.uargs = uargs
+        # base64 output
+        self.base64 = False
 
     def get_dkey_hexstring(self):
         """ This method return the derived in a hex string
@@ -82,47 +87,72 @@ class Toxin:
         """
         return self.iv.hex()
 
+    def get_iv_decarray(self):
+        """ This method return the Salt in a decimal array
+        """
+        return bytes2decarray(self.iv)
+
     def get_salt_hexstring(self):
         """ This method return the Salt in a hex string
         """
         return self.salt.hex()
 
-    def get_ciphertext(self, lang=None, width=54, tab_width=17, var_name=None):
-        """ This method return a formatted ciphertext
+    def get_salt_decarray(self):
+        """ This method return the Salt in a decimal array
         """
-        self.ciphertext = str(self.ciphertext, 'UTF-8')
+        return bytes2decarray(self.salt)
 
+    def get_ciphertext(self, lang=None, width=54, tab_width=17, var_name=None):
+        """ This method return a formatted and
+            base64 encoded ciphertext
+        """
         tab = " " * tab_width
         ciph = ""
 
         # PowerShell
-        if lang == LANG_POWERSHELL and len(self.ciphertext) > width:
-            for i in range(0, len(self.ciphertext), width):
-                if i > 0:
-                    if var_name:
-                        ciph += var_name + " += "
-                    else:
-                        ciph += tab
-                ciph += format(f"\"{self.ciphertext[i:i + width]}\"\n")
+        if lang == LANG_POWERSHELL:
+            _ciphertext = str(encode_base64(self.ciphertext), 'UTF-8')
+            if len(_ciphertext) > width:
+                for i in range(0, len(_ciphertext), width):
+                    if i > 0:
+                        if var_name:
+                            ciph += var_name + " += "
+                        else:
+                            ciph += tab
+                    ciph += format(f"\"{_ciphertext[i:i + width]}\"\n")
         # C#
         elif lang == LANG_CSHARP:
+            _ciphertext = str(encode_base64(self.ciphertext), 'UTF-8')
             # if not multi lines width
-            if len(self.ciphertext) < width:
-                return format(f"\"{self.ciphertext}\";")
+            if len(_ciphertext) < width:
+                return format(f"\"{_ciphertext}\";")
 
-            for i in range(0, len(self.ciphertext), width):
+            for i in range(0, len(_ciphertext), width):
                 # if it's the start of the ciphertext variable
                 if i == 0:
                     ciph += "@"
                 # handle decoration around the variable construct
-                if i > len(self.ciphertext) - width - 1:
+                if i > len(_ciphertext) - width - 1:
                     ciph += tab + \
-                        format(f"{self.ciphertext[i:i + width]}\";\n")
+                        format(f"{_ciphertext[i:i + width]}\";\n")
                 elif i > 0:
-                    ciph += tab + format(f"{self.ciphertext[i:i + width]}\n")
+                    ciph += tab + format(f"{_ciphertext[i:i + width]}\n")
                 else:
-                    ciph += format(f"\"{self.ciphertext[i:i + width]}\n")
+                    ciph += format(f"\"{_ciphertext[i:i + width]}\n")
+        # VBA
+        elif lang == LANG_VBA:
+            _ciphertext = bytes2decarray(self.ciphertext)
+            for i, d in enumerate(_ciphertext):
+                if i == 0:
+                    ciph += format(f"{d}, ")
+                elif i % width == 0:
+                    ciph += format(f"{d}, _\n")
+                else:
+                    ciph += format(f"{d}, ")
+
+        # Plain / Others
         else:
             ciph = format(f"\"{self.ciphertext}\"")
 
+        # return built ciph variable
         return ciph

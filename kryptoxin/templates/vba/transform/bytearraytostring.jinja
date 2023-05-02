@@ -1,0 +1,21 @@
+{# bytearraytostring.jinja #}
+{#
+    This Jinja2 template includes a VBA Byte Array
+    to String conversion function.
+#}
+
+Function ByteArrayToString(byteArray As Variant) As String
+
+    ' Declare variables
+    Dim hexString As String
+    Dim i As Integer
+    
+    ' Convert byte array to hex string
+    For i = 0 To UBound(byteArray)
+        hexString = hexString & Right("0" & Hex(byteArray(i)), 2)
+    Next i
+    
+    ' Return hex string
+    ByteArrayToString = hexString
+    
+End Function

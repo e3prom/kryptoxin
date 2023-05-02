@@ -7,6 +7,9 @@ This module defines the various program-wide constants.
 PROGRAM_NAME = 'Kryptoxin'
 # CLI parameters
 CLI_DISPLAYKEY = False                   # Display generated key on the console
+# Ciphers List
+CIPHER_AES = "AES"                      # Advanced Encryption Standard
+CIPHER_CAESAR = "Caesar"                # Caesar Cipher
 # Cipher Parameters- Defaults
 CIPHER_DEFAULT_ALGORITHM = "aes"        # Default encryption algorithm
 CIPHER_DEFAULT_KEYSIZE = 256            # Default block cipher key-size
@@ -34,9 +37,11 @@ CIPHER_BLOCK_OPERMODE_EAX = "eax"       # Encrypt-Authenticate-Translate
 # Languages
 LANG_POWERSHELL = "powershell"          # PowerShell cmd-line option string
 LANG_CSHARP = "csharp"                  # C# cmd-line option string
+LANG_VBA = "vba"                        # Visual Basic option string
 # Jinja Templates
 JINJA_TEMPLATES_DIR = "templates/"      # Jinja2 template directory
 JINJA_TEMPLATES_PS = "powershell/"      # PowerShell templates directory
 JINJA_TEMPLATES_CSHARP = "csharp/"      # C# templates directory
+JINJA_TEMPLATES_VBA = "vba/"            # VBA templates directory
 JINJA_TEMPLATES_ACTSDIR = "actions/"    # Actions templates directory
 JINA_TEMPLATES_FEXT = ".jinja"          # Jinja2 templates files extension
