@@ -150,7 +150,7 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
         if int(key) in range(0, 255):
             tx.ciphertext = caesar.encrypt(tx, key=int(key))
         else:
-            log.error(f"Please specifiy a Caasar cipher key between 1 and 255.")
+            log.error("Please specify a Caasar cipher key between 1 and 255.")
             raise SystemExit
     # UNDEFINED ALG
     else:
@@ -241,7 +241,7 @@ def decrypt(alg, key, key_size, opmode, iv, salt, hmac,
             tx.plaintext = caesar.decrypt(tx, key=int(key))
             output = tx.plaintext
         else:
-            log.error(f"Please specifiy a Caasar cipher key between 1 and 255.")
+            log.error("Please specify a Caasar cipher key between 1 and 255.")
             raise SystemExit
     else:
         log.error(f"Invalid encryption algorithm {alg}.", alg)

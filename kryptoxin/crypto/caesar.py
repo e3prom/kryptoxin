@@ -21,8 +21,8 @@ def encrypt(t: Toxin, key=2):
         _ciphertext = b""
         for i in range(0, len(t.plaintext)):
             _ciphertext += (t.plaintext[i]+key & 0xFF).to_bytes(1, 'little')
-    except:
-        log.error(f"Cannot interpret input format.")
+    except None:
+        log.error("Cannot interpret input format.")
         raise SystemExit
 
     # Return the ciphertext
