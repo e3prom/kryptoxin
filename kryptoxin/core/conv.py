@@ -12,5 +12,4 @@ def bytes2decarray(barray):
     _declist = []
     for b in barray:
         _declist.append(f'{b:d}')
-        #_declist.append(b+2 & 0xFF)
     return _declist

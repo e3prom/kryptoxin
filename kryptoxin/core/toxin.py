@@ -103,8 +103,7 @@ class Toxin:
         return bytes2decarray(self.salt)
 
     def get_ciphertext(self, lang=None, width=54, tab_width=17, var_name=None):
-        """ This method return a formatted and
-            base64 encoded ciphertext
+        """ This method return a formatted ciphertext
         """
         tab = " " * tab_width
         ciph = ""
@@ -147,6 +146,8 @@ class Toxin:
                     ciph += format(f"{d}, ")
                 elif i % width == 0:
                     ciph += format(f"{d}, _\n")
+                elif i == len(_ciphertext)-1:
+                    ciph += format(f"{d}")
                 else:
                     ciph += format(f"{d}, ")
 

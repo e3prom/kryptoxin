@@ -146,7 +146,12 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
             log.info(f"The PBKDF2 Salt is: {tx.get_salt_hexstring()}")
     # CAESAR
     elif alg == CIPHER_CAESAR:
-        tx.ciphertext = caesar.encrypt(tx)
+        # check key validiting
+        if int(key) in range(0, 255):
+            tx.ciphertext = caesar.encrypt(tx, key=int(key))
+        else:
+            log.error(f"Please specifiy a Caasar cipher key between 1 and 255.")
+            raise SystemExit
     # UNDEFINED ALG
     else:
         log.error(f"Invalid encryption algorithm {alg}.", alg)
@@ -187,6 +192,8 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     else:
         if alg == CIPHER_AES:
             output = base64.encode_base64(tx.ciphertext)
+        elif alg == CIPHER_CAESAR:
+            output = base64.encode_base64(tx.ciphertext)
         else:
             output = bytes(tx.get_ciphertext(), 'UTF-8')
 
@@ -220,11 +227,25 @@ def decrypt(alg, key, key_size, opmode, iv, salt, hmac,
                hmac, CIPHER_DEFAULT_IV_PREPEND,
                ciphertext=ciphertext)
 
-    # Call decryption function.
-    tx.plaintext = aes.decrypt(tx)
+    # prepare output
+    output = ""
 
-    # Store outout
-    output = tx.plaintext
+    # AES
+    if alg == CIPHER_AES:
+        tx.plaintext = aes.decrypt(tx)
+        output = tx.plaintext
+    # CAESAR
+    elif alg == CIPHER_CAESAR:
+        # check key validiting
+        if int(key) in range(0, 255):
+            tx.plaintext = caesar.decrypt(tx, key=int(key))
+            output = tx.plaintext
+        else:
+            log.error(f"Please specifiy a Caasar cipher key between 1 and 255.")
+            raise SystemExit
+    else:
+        log.error(f"Invalid encryption algorithm {alg}.", alg)
+        raise SystemExit
 
     # If output file given, write content (and create file if necessary).
     if output_file:

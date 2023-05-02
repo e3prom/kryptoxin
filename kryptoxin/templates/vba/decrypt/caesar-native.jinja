@@ -1,0 +1,7 @@
+{# caesar-native.jinja #}
+{#
+    This Jinja2 template includes the VBA decryption routines for the Caesar cipher.
+#}
+    For i = 0 To UBound(Trvr)
+        Trvr(i) = Trvr(i) - {{key}}
+    Next i
