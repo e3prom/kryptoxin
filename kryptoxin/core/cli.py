@@ -112,7 +112,11 @@ def encrypt(ctx, alg, key, key_size, opmode, iv, random_iv, salt, random_salt,
     See Options below for more information.
     """
     # build a directory for unknown arguments
-    uargs = dict([arg.strip('--').split('=') for arg in ctx.args])
+    try:
+        uargs = dict([arg.strip('--').split('=') for arg in ctx.args])
+    except ValueError:
+        log.error(f"Unknown argument(s) given {ctx.args}.")
+        raise SystemExit
 
     # Read provided file and catch errors if any.
     try:

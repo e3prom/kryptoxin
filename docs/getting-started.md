@@ -13,10 +13,10 @@ Open up a terminal and install Kryptoxin using pip:
     ``` sh
     pip install kryptoxin
     ```
-=== "v0.9.8"
+=== "v0.9.9"
 
     ``` sh
-    pip install kryptoxin==0.9.8
+    pip install kryptoxin==0.9.9
     ```
 
 The above commands will automatically install all the required dependencies.
@@ -33,11 +33,11 @@ First make sure you have `git` installed. Then, fetch the source code from the o
     sudo make install
     ```
 
-=== "v0.9.8"
+=== "v0.9.9"
 
     ``` sh
     git clone https://github.com/e3prom/kryptoxin
     cd kryptoxin
-    git checkout tags/0.9.8
+    git checkout tags/0.9.9
     sudo make install
     ```

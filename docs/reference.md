@@ -8,7 +8,9 @@ To keep the usage simple and streamlined, Kryptoxin implicitly uses parameters b
 
 ### Encryption and Decryption
 
-* Encryption Algorithm: `Advanced Encryption Standard` or `AES`
+* Encryption Algorithm:
+    * `Advanced Encryption Standard` or `AES`
+    * `Caesar Cipher`
 * Encryption key size: `256 bits`
 * Block Cipher Mode of Operation: `Cipher Block Chaining` or `CBC`
 * Key-Derivation Function: `PBKDF2`
@@ -43,6 +45,7 @@ The options listed below allow you to control the various cryptographic paramete
     * Support between 256 and 4096 bits keys.
 * Encryption Algorithms (`-a`, `--alg`):
     * Advanced Encryption Standard: `AES`
+    * Caesar Cipher: `Caesar`
 * Block Cipher Mode of Operations (`-m`, `--mode`):
     * Cipher Block Chaining: `CBC`
     * Cipher Feedback: `CFB`
@@ -77,5 +80,7 @@ When using templates, you must specify the output programming language and the d
         * `custom`: A base template for your custom program or library.
         * `print`: A console program that print the encrypted text.
         * `load-library`: This console program loads a **decrypted** DLL to disk and load it under an existing `explorer.exe` process.
-            * `--dllname`: The filename of the DLL as written to the host's disk.
+            * `--dllname`: The file name of the DLL as written to the host's disk.
             * `--process`: Existing process name to execute under.
+    * VBA Macro:
+        * `load-asm`: Load assembly code in memory and start a new thread.

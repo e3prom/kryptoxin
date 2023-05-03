@@ -11,7 +11,7 @@
   - [Features](#features)
   - [Installation](#installation)
     - [With pip (latest release)](#with-pip-latest-release)
-    - [With git (v0.9.8)](#with-git-v098)
+    - [With git (v0.9.9)](#with-git-v099)
   - [Usages examples](#usages-examples)
     - [Read, encrypt and decrypt, all from stdin](#read-encrypt-and-decrypt-all-from-stdin)
     - [Encrypt using AES-128-CFB](#encrypt-using-aes-128-cfb)
@@ -31,12 +31,14 @@ The name `Kryptoxin` comes from the contraction of `Kryptos` (meaning `conceal`,
 The below features are supported:
 
 - Provides block-cipher encryption algorithms such as the `Advanced Encryption Standard` or `AES`.
+- Implements basic encryption ciphers such as a derivative of the [`Caesar Cipher`](https://en.wikipedia.org/wiki/Caesar_cipher).
 - Supports user-specifiable key sizes and block-cipher modes of operations, such as `AES256-CBC`.
 - Generate random cryptographic parameters such as `Initialization Vector` and `Salt`.
 - Encodes and properly formats variables for fast and streamlined copy/paste operations.
 - Handles `Text Files`, `Scripts`, `Portable Executables (PE)`, `Dynamic Link Libraries (DLLs)`, and `shellcodes` objects.
 - Generates compact, portable scripts or source codes as outputs for the below programming languages:
   - [x] PowerShell
+  - [x] VBA Macro
   - [x] C#
   - [ ] C++
   - [ ] C
@@ -52,12 +54,12 @@ The below features are supported:
 pip install kryptoxin
 ```
 
-### With git (v0.9.8)
+### With git (v0.9.9)
 
 ``` sh
 git clone https://github.com/e3prom/kryptoxin
 cd kryptoxin
-git checkout tags/0.9.8
+git checkout tags/0.9.9
 sudo make install
 ```
 
